@@ -9,7 +9,7 @@
     "start": "webpack-dev-server --quiet",
     "eslint": "./node_modules/.bin/eslint --init",
     "lint": "eslint scripts --ext .js --cache --fix",
-    "pre-lint": "node check.js"
+    "pre-lint": "echo 'aaaa' && node check.js"
   },
   "pre-commit": [
     "pre-lint"

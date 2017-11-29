@@ -5,7 +5,7 @@ import Component from '../component'
 
 const ItemTypes = {
     DRAGDIV: 'dragdiv'
-}
+};
 
 const squareTarget = {
     drop (props, monitor, component) {
