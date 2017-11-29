@@ -5,21 +5,21 @@ import Component from '../component'
 
 const ItemTypes = {
     DRAGDIV: 'dragdiv'
-};
+}
 
 const squareTarget = {
     drop (props, monitor, component) {
-        const item = monitor.getItem()
+        const item = monitor.getItem();
         component.handleDrop(item)
     }
-};
+}
 
 function collect (connect, monitor) {
     return {
         connectDropTarget: connect.dropTarget(),
         isOver: monitor.isOver()
     }
-};
+}
 
 @DropTarget(ItemTypes.DRAGDIV, squareTarget, collect)
 export default class MainPanel extends React.Component {
