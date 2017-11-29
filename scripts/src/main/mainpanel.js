@@ -12,7 +12,7 @@ const squareTarget = {
         const item = monitor.getItem()
         component.handleDrop(item)
     }
-}
+};
 
 function collect (connect, monitor) {
     return {
