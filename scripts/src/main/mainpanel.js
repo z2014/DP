@@ -19,7 +19,7 @@ function collect (connect, monitor) {
         connectDropTarget: connect.dropTarget(),
         isOver: monitor.isOver()
     }
-}
+};
 
 @DropTarget(ItemTypes.DRAGDIV, squareTarget, collect)
 export default class MainPanel extends React.Component {
