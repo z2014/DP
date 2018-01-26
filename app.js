@@ -7,6 +7,7 @@ const koaStatic = require('koa-static')
 const favicon = require('koa-favicon')
 const path = require('path')
 const index = require('./routers/index')
+const create = require('./routers/create')
 
 app.use(koaStatic(
     path.join(__dirname, './public')
@@ -19,6 +20,7 @@ app.use(views(path.join(__dirname, './templates'), {
 }))
 
 app.use(index.routes())
+app.use(create.routes())
 
 app.listen(4040)
 

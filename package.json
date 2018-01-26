@@ -5,15 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node generateBasicCom.js && node-dev app.js",
-    "start": "webpack-dev-server --quiet",
-    "eslint": "./node_modules/.bin/eslint --init",
-    "lint": "eslint scripts --ext .js --cache --fix",
-    "pre-lint": "echo 'aaaa' && node check.js"
+    "dev": "node ./build/generateBasicCom.js && node-dev app.js",
+    "start": "webpack --watch"
   },
-  "pre-commit": [
-    "pre-lint"
-  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -27,7 +21,9 @@
     "react-dnd": "^2.5.4",
     "react-dnd-html5-backend": "^2.5.4",
     "react-dom": "^16.0.0",
-    "webpack": "^3.8.1"
+    "shelljs": "^0.7.8",
+    "webpack": "^3.8.1",
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -40,6 +36,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "copy-webpack-plugin": "^4.2.0",
     "css-loader": "^0.28.7",
+    "ejs-loader": "^0.3.0",
     "eslint": "^4.12.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-standard": "^10.2.1",
@@ -53,7 +50,6 @@
     "less-loader": "^4.0.5",
     "pre-commit": "^1.2.2",
     "style-loader": "^0.19.0",
-    "webpack-dashboard": "^1.0.2",
     "webpack-dev-server": "^2.9.5"
   }
 }

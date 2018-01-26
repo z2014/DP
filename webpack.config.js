@@ -1,23 +1,25 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractPlugin = require('extract-text-webpack-plugin')
-var Dashboard = require('webpack-dashboard')
-var DashboardPlugin = require('webpack-dashboard/plugin')
-var dashboard = new Dashboard()
 var webpack = require('webpack')
+var path = require('path')
 
 
 module.exports = {
     entry: {	
-        entry : './scripts/src/entry.js',
+        entry : ['./scripts/src/entry.js', 'whatwg-fetch'],
         vendor: ['react', 'react-dom']
     },
     output: {	
         path: __dirname + '/public',
         publicPath: '/',
+        chunkFilename: '[name].[chunkhash:5].chunk.js',
         filename: '[name].js'
     },
     resolve: {
-        extensions: ['.js', '.jsx','style', '.less']
+        extensions: ['.js', '.jsx','style', '.less'],
+        alias: {
+            '@style': path.resolve(__dirname + '/scripts/style')
+        }
     },
     module: {
 	    loaders: [{
@@ -38,16 +40,15 @@ module.exports = {
         }]
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            template: './scripts/template/index.html',
-            chunks: ['entry', 'vendor'],
-            filename: '../templates/backend.ejs'
-        }),
+        // new HtmlWebpackPlugin({
+        //     template: './scripts/template/index.html',
+        //     chunks: ['entry', 'vendor'],
+        //     filename: '../templates/backend.ejs'
+        // }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             chunks: 'vendor'
         }),
-        new ExtractPlugin('bundle.css'),
-        new DashboardPlugin(dashboard.setData)
+        new ExtractPlugin('bundle.css')
     ]
 }

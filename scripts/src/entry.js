@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import '../style/index'
+import '@style/index'
+import '@style/reset'
 import Nav from './nav/nav'
 import SideBar from './sidebar/sidebar'
 import MainPanel from './main/mainpanel'

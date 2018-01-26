@@ -9,10 +9,10 @@ const ItemTypes = {
 
 const squareTarget = {
     drop (props, monitor, component) {
-        const item = monitor.getItem();
+        const item = monitor.getItem()
         component.handleDrop(item)
     }
-};
+}
 
 function collect (connect, monitor) {
     return {

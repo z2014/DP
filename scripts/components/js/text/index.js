@@ -1,12 +1,14 @@
 import React from 'react'
+import '../../../style/text.less'
+
 export default class Text extends React.Component {
     constructor (props) {
         super(props)
     }
     render () {
         return (
-            <div>
-                这是一段文本
+            <div className="text">
+                这是一段文本flflflfllaaaa
             </div>
         )
     }
