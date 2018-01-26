@@ -11,8 +11,22 @@ module.exports = function build(pageId) {
     const component = generate(config)
     const jsPath = path.join(__dirname + '/../public/dist')
     const template = path.join(__dirname + '/../scripts/src/build.js')
+    const coms = [{
+        com: {
+            component_desc: "文本",
+            component_name: "text",
+            component_path: "../components/js/text/index"
+        }
+    },{
+        com: {
+            component_desc: "文本",
+            component_name: "text",
+            component_path: "../components/js/text/index"
+        }
+    }]
     ejs.renderFile(template, {
-        component: component
+        component: component,
+        coms: coms
     }, (err, str) => {
         if (err) console.log(err)
         fs.exists(`${jsPath}/${pageId}`, function(exists) {

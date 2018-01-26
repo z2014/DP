@@ -1,6 +1,6 @@
 import '../../style/index'
 import React from 'react'
-import build from '../request/build'
+import build from '../request/api'
 
 export default class Nav extends React.Component {
     build() {

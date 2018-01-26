@@ -1,136 +1,22 @@
-webpackJsonp([1],{
+webpackJsonp([0],{
 
-/***/ 16:
+/***/ 15:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(17);
-module.exports = __webpack_require__(33);
+__webpack_require__(16);
+module.exports = __webpack_require__(17);
 
+
+/***/ }),
+
+/***/ 16:
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: SyntaxError: Unexpected token, expected , (58:21)\n\n\u001b[0m \u001b[90m 56 | \u001b[39m\u001b[90m//     }\u001b[39m\n \u001b[90m 57 | \u001b[39m\u001b[90m// }]\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 58 | \u001b[39m\u001b[36mconst\u001b[39m coms \u001b[33m=\u001b[39m [object \u001b[33mObject\u001b[39m]\u001b[33m,\u001b[39m[object \u001b[33mObject\u001b[39m]\n \u001b[90m    | \u001b[39m                     \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 59 | \u001b[39m\u001b[36mclass\u001b[39m \u001b[33mApp\u001b[39m \u001b[36mextends\u001b[39m \u001b[33mReact\u001b[39m\u001b[33m.\u001b[39m\u001b[33mComponent\u001b[39m {\n \u001b[90m 60 | \u001b[39m    render() {\n \u001b[90m 61 | \u001b[39m        \u001b[36mconst\u001b[39m coms \u001b[33m=\u001b[39m coms\u001b[33m.\u001b[39mmap((com\u001b[33m,\u001b[39m index) \u001b[33m=>\u001b[39m {\u001b[0m\n");
 
 /***/ }),
 
 /***/ 17:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.default = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _reactDom = __webpack_require__(10);
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-var _react = __webpack_require__(4);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // import React from 'react'
-
-
-var Component = function (_React$Component) {
-    _inherits(Component, _React$Component);
-
-    function Component(props) {
-        _classCallCheck(this, Component);
-
-        var _this = _possibleConstructorReturn(this, (Component.__proto__ || Object.getPrototypeOf(Component)).call(this, props));
-
-        _this.state = {
-            com: ''
-        };
-        return _this;
-    }
-
-    _createClass(Component, [{
-        key: 'renderChild',
-        value: function renderChild(children) {
-
-            if (children.com.component_name === 'text') {
-                return function (ctx) {
-                    __webpack_require__.e/* require.ensure */(0).then((function (require) {
-                        ctx.state.com = __webpack_require__(35);
-                        ctx.setState({});
-                    }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
-                };
-            }
-        }
-    }, {
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            if (this.props.com) {
-                var fn = this.renderChild(this.props.com);
-                fn(this);
-            }
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            return _react2.default.createElement(
-                'div',
-                { className: 'basic-component' },
-                this.state.com ? _react2.default.createElement(this.state.com, this.props) : null
-            );
-        }
-    }]);
-
-    return Component;
-}(_react2.default.Component);
-
-exports.default = Component;
-
-
-var components = [{
-    com: {
-        component_desc: "文本",
-        component_name: "text",
-        component_path: "../components/js/text/index"
-    }
-}];
-
-var App = function (_React$Component2) {
-    _inherits(App, _React$Component2);
-
-    function App() {
-        _classCallCheck(this, App);
-
-        return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
-    }
-
-    _createClass(App, [{
-        key: 'render',
-        value: function render() {
-            var coms = components.map(function (com, index) {
-                return _react2.default.createElement(Component, { com: com, key: index });
-            });
-            return _react2.default.createElement(
-                'div',
-                null,
-                coms
-            );
-        }
-    }]);
-
-    return App;
-}(_react2.default.Component);
-
-_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('app'));
-module.exports = exports['default'];
-
-/***/ }),
-
-/***/ 33:
 /***/ (function(module, exports) {
 
 (function(self) {
@@ -598,4 +484,4 @@ module.exports = exports['default'];
 
 /***/ })
 
-},[16]);
+},[15]);

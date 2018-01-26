@@ -11,13 +11,14 @@ const webpackConfig = function(entry, output, pageId) {
         },
         output: {   
             path: output,
-            publicPath: `/dist/${pageId}`,
+            publicPath: `/dist/${pageId}/`,
+            chunkFilename: '[name].js',
             filename: '[name].js'
         },
         resolve: {
             extensions: ['.js', '.jsx','style', '.less'],
             alias: {
-                '@style': path.resolve(__dirname + '../scripts/style')
+                '@style': path.resolve(__dirname + '/../scripts/style')
             }
         },
         module: {
