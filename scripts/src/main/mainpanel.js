@@ -2,6 +2,7 @@ import '../../style/index'
 import React from 'react'
 import { DropTarget } from 'react-dnd'
 import Component from '../component'
+import { observer } from 'mobx-react'
 
 const ItemTypes = {
     DRAGDIV: 'dragdiv'
@@ -10,7 +11,8 @@ const ItemTypes = {
 const squareTarget = {
     drop (props, monitor, component) {
         const item = monitor.getItem()
-        component.handleDrop(item)
+        // component.handleDrop(item)
+        props.store.addConfig(item)
     }
 }
 
@@ -21,6 +23,7 @@ function collect (connect, monitor) {
     }
 }
 
+@observer
 @DropTarget(ItemTypes.DRAGDIV, squareTarget, collect)
 export default class MainPanel extends React.Component {
     constructor (props) {
@@ -37,12 +40,9 @@ export default class MainPanel extends React.Component {
 
     render () {
         const { connectDropTarget } = this.props
-        let coms
-        if (this.state.coms.length !== 0) {
-            coms = this.state.coms.map((com, index) => {
-                return <Component com={com} key={index} />
-            })
-        }
+        let coms = this.props.store.config.map((com, index) => {
+            return <Component com={com} key={index} />
+        })
         return connectDropTarget(
             <div className='mainpanel'>
                 这是主页

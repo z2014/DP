@@ -17,6 +17,7 @@ function generate(config) {
         coms += str
     })
     let register = `
+    // 来自于generate.js，模版生成
     import React from 'react'
     export default class Component extends React.Component {
 
