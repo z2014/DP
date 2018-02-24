@@ -4,11 +4,12 @@ import '../../../style/text.less'
 export default class Text extends React.Component {
     constructor (props) {
         super(props)
+        this.config = this.props.com.com.component_meta
     }
     render () {
         return (
             <div className="text">
-                这是一段文本flflflfllaaaa
+                { this.config.content.value }
             </div>
         )
     }

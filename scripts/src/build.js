@@ -3,23 +3,13 @@ import ReactDOM from 'react-dom'
 
 <%- component %>
 
-// const components = [{
-//     com: {
-//         component_desc: "文本",
-//         component_name: "text",
-//         component_path: "../components/js/text/index"
-//     }
-// },{
-//     com: {
-//         component_desc: "文本",
-//         component_name: "text",
-//         component_path: "../components/js/text/index"
-//     }
-// }]
-const coms = <%- coms %>
+
+const components = <%- components %>
+
 class App extends React.Component {
     render() {
-        const coms = coms.map((com, index) => {
+        let test = JSON.parse(components)
+        const coms = test.map((com, index) => {
             return <Component com={com} key={index} />
         })
         return (

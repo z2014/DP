@@ -1,7 +1,7 @@
 const fs = require('fs')
 const config = require('../scripts/config')
 
-function generate(config) {
+function generate(config, bool) {
     let coms = ''
     config.map(com => {
         const str = `
@@ -19,6 +19,7 @@ function generate(config) {
     let register = `
     // 来自于generate.js，模版生成
     import React from 'react'
+
     export default class Component extends React.Component {
 
         constructor(props) {
@@ -26,6 +27,8 @@ function generate(config) {
             this.state = {
                 com: ''
             }
+            this.edit = this.edit.bind(this)
+            this.close = this.close.bind(this)
         }
 
         renderChild(children) {
@@ -39,9 +42,24 @@ function generate(config) {
             }
         }
 
+        edit() {
+            this.props.renderModal(this.props.com.com)
+        }
+
+        close() {
+            this.props.removeComponent(this.props.com)
+        }
+
         render () {
             return (
                 <div className="basic-component">
+                    {
+                        ${bool} ? 
+                        (<div className="btn-nav">
+                            <img src="/edit.png" className="btn-oper" onClick={this.edit}/>
+                            <img src="/close.png" className="btn-oper" onClick={this.close}/>
+                        </div>) : null
+                    }
                     { this.state.com ? React.createElement(this.state.com, this.props) : null }     
                 </div>
             )
@@ -50,7 +68,7 @@ function generate(config) {
     `
     return register
 }
-const register = generate(config)
+const register = generate(config, true)
 const path = './scripts/src/component.js'
 fs.writeFile(path, register, function () {
     console.log('generate components done')

@@ -7,26 +7,14 @@ const config = require('../scripts/config')
 const sh = require('shelljs')
 const createConfig = require('./webpack_config')
 
-module.exports = function build(pageId) {
-    const component = generate(config)
+module.exports = function build(pageId, coms) {
+    const component = generate(config, false)
     const jsPath = path.join(__dirname + '/../public/dist')
     const template = path.join(__dirname + '/../scripts/src/build.js')
-    const coms = [{
-        com: {
-            component_desc: "文本",
-            component_name: "text",
-            component_path: "../components/js/text/index"
-        }
-    },{
-        com: {
-            component_desc: "文本",
-            component_name: "text",
-            component_path: "../components/js/text/index"
-        }
-    }]
+    console.log('aa',coms)
     ejs.renderFile(template, {
         component: component,
-        coms: coms
+        components: `'${JSON.stringify(coms)}'`
     }, (err, str) => {
         if (err) console.log(err)
         fs.exists(`${jsPath}/${pageId}`, function(exists) {

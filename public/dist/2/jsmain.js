@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom'
 
     // 来自于generate.js，模版生成
     import React from 'react'
-
     export default class Component extends React.Component {
 
         constructor(props) {
@@ -12,8 +11,6 @@ import ReactDOM from 'react-dom'
             this.state = {
                 com: ''
             }
-            this.edit = this.edit.bind(this)
-            this.close = this.close.bind(this)
         }
 
         renderChild(children) {
@@ -45,24 +42,12 @@ import ReactDOM from 'react-dom'
             }
         }
 
-        edit() {
-            this.props.renderModal(this.props.com.com)
-        }
-
-        close() {
-            this.props.removeComponent(this.props.com)
-        }
-
         render () {
             return (
                 <div className="basic-component">
-                    {
-                        false ? 
-                        (<div className="btn-nav">
-                            <img src="/edit.png" className="btn-oper" onClick={this.edit}/>
-                            <img src="/close.png" className="btn-oper" onClick={this.close}/>
-                        </div>) : null
-                    }
+                    <div className="btn-nav">
+                        <i className="iconfont icon-MapEditing"></i>
+                    </div>
                     { this.state.com ? React.createElement(this.state.com, this.props) : null }     
                 </div>
             )
@@ -71,7 +56,7 @@ import ReactDOM from 'react-dom'
     
 
 
-const components = '[{"com":{"component_name":"text","component_path":"components/js/text/index","component_desc":"文本","component_meta":{"label":{"name":"文本组件","type":"string"},"content":{"name":"文本内容","type":"string"}},"component_id":0}},{"com":{"component_name":"pieChart","component_path":"components/js/pie/index","component_desc":"饼状图","component_id":1}}]'
+const components = '[{"com":{"component_name":"text","component_path":"components/js/text/index","component_desc":"文本"}}]'
 
 class App extends React.Component {
     render() {

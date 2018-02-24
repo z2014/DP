@@ -27,7 +27,7 @@ const webpackConfig = function(entry, output, pageId) {
                 exclude: /node_modules/,
                 loader: 'babel-loader',
                 query: {
-                    presets: ['react', 'env'],
+                    presets: ['react', 'env', 'stage-3'],
                     plugins: ['transform-decorators-legacy', 'add-module-exports']
                 }
             }, {

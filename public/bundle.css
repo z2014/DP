@@ -9,7 +9,8 @@
   width: 100%;
   line-height: 80px;
   text-align: center;
-  background-color: #ccc;
+  background-color: #394b6b;
+  color: white;
 }
 .wrapper {
   display: flex;
@@ -25,6 +26,7 @@
 }
 .com {
   width: 50%;
+  display: inline-block;
   box-sizing: border-box;
   line-height: 30px;
   text-align: center;
@@ -37,11 +39,100 @@
   min-height: 50px;
   border: 1px dashed #ccc;
   margin: 10px;
+  position: relative;
+}
+.btn-nav {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+.btn-oper {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  box-sizing: border-box;
+  margin-right: 10px;
+}
+.btn-oper:hover {
+  box-shadow: 1px 1px 5px #ccc;
+  cursor: pointer;
 }
 .preview-btn {
   display: inline-block;
   background-color: #FFBBFF;
   line-height: 30px;
+}
+.modal-wrapper {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.modal {
+  position: fixed;
+  width: 600px;
+  min-height: 400px;
+  max-height: 600px;
+  overflow: auto;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: 1px 1px 5px #eee;
+  background-color: white;
+  z-index: 999;
+}
+.meta-wrapper {
+  display: flex;
+  margin: 20px 0;
+}
+.meta-text {
+  flex: 3;
+  display: flex;
+  justify-content: flex-end;
+}
+.meta-input {
+  flex: 5;
+  width: 200px;
+  display: flex;
+  justify-content: space-around;
+}
+.meta-input input {
+  width: 200px;
+}
+.btn-bottom {
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  box-sizing: border-box;
+  padding: 0 50px;
+}
+.confirm-btn {
+  display: inline-block;
+  width: 150px;
+  line-height: 30px;
+  text-align: center;
+  background-color: #0084ff;
+  color: white;
+  font-size: 20px;
+  border-radius: 15px;
+}
+.cancel-btn {
+  display: inline-block;
+  width: 150px;
+  line-height: 30px;
+  text-align: center;
+  background-color: #98FB98;
+  color: white;
+  font-size: 20px;
+  border-radius: 15px;
+  border: 1px solid #ccc;
 }
 a {
   text-decoration: none;

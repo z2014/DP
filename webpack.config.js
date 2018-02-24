@@ -16,13 +16,16 @@ module.exports = {
         filename: '[name].js'
     },
     resolve: {
-        extensions: ['.js', '.jsx','style', '.less'],
+        extensions: ['.ts', '.js', '.jsx', 'style', '.less'],
         alias: {
             '@style': path.resolve(__dirname + '/scripts/style')
         }
     },
     module: {
 	    loaders: [{
+            test: /\.ts$/,
+            use: ['babel-loader', 'ts-loader']
+        }, {
             test: /\.js$/,
             exclude: /node_modules/,
             loader: 'babel-loader',

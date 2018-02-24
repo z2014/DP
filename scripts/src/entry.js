@@ -8,36 +8,36 @@ import MainPanel from './main/mainpanel'
 import config from '../config'
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
-import { observable, computed, action, useStrict } from 'mobx'
-import { observer } from 'mobx-react'
-useStrict(true)
+import { observer,Provider } from 'mobx-react'
+import store from './mobx/index'
+import { getPageInfo } from './request/api'
 
-class Store {
-    @observable config = []
 
-    get configJson() {
-        return this.config
-    }
-
-    @action addConfig(config) {
-        this.config.push(config)
-    }
-}
-const store = new Store()
 
 @observer
 @DragDropContext(HTML5Backend)
 class App extends React.Component {
+    componentDidMount() {
+        const self = this
+        getPageInfo(window.info.pageId).then(res => {
+            console.log('===== pageInfo ======', JSON.parse(res.data.pageInfo))
+            const pageinfo = JSON.parse(res.data.pageInfo)
+            self.props.store.config = pageinfo
+            self.setState({})
+        })
+    }
     render () {
         const { store } = this.props
         return (
-            <div>
-                <Nav />
-                <div className='wrapper'>
-                    <SideBar config={config} />
-                    <MainPanel store={store}/>
+            <Provider store={store}>
+                <div>
+                    <Nav/>
+                    <div className='wrapper'>
+                        <SideBar config={config} />
+                        <MainPanel/>
+                    </div>
                 </div>
-            </div>
+            </Provider>
         )
     }
 }

@@ -79,7 +79,6 @@ export default class pieChart extends React.Component{
             ]
         }
         const mychart = echarts.init(document.getElementById('pieChart'))
-        console.log(mychart)
         mychart.setOption(option)
     }
     render() {

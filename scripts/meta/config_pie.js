@@ -1,7 +1,7 @@
 
 module.exports = {
-    label: {
-        name: '文本组件',
+    url: {
+        name: '获取数据',
         type: 'string'
     },
     content: {

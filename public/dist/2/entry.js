@@ -53,8 +53,6 @@ var Component = function (_React$Component) {
         _this.state = {
             com: ''
         };
-        _this.edit = _this.edit.bind(_this);
-        _this.close = _this.close.bind(_this);
         return _this;
     }
 
@@ -89,27 +87,16 @@ var Component = function (_React$Component) {
             }
         }
     }, {
-        key: 'edit',
-        value: function edit() {
-            this.props.renderModal(this.props.com.com);
-        }
-    }, {
-        key: 'close',
-        value: function close() {
-            this.props.removeComponent(this.props.com);
-        }
-    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
                 'div',
                 { className: 'basic-component' },
-                false ? _react2.default.createElement(
+                _react2.default.createElement(
                     'div',
                     { className: 'btn-nav' },
-                    _react2.default.createElement('img', { src: '/edit.png', className: 'btn-oper', onClick: this.edit }),
-                    _react2.default.createElement('img', { src: '/close.png', className: 'btn-oper', onClick: this.close })
-                ) : null,
+                    _react2.default.createElement('i', { className: 'iconfont icon-MapEditing' })
+                ),
                 this.state.com ? _react2.default.createElement(this.state.com, this.props) : null
             );
         }
@@ -121,7 +108,7 @@ var Component = function (_React$Component) {
 exports.default = Component;
 
 
-var components = '[{"com":{"component_name":"text","component_path":"components/js/text/index","component_desc":"文本","component_meta":{"label":{"name":"文本组件","type":"string"},"content":{"name":"文本内容","type":"string"}},"component_id":0}},{"com":{"component_name":"pieChart","component_path":"components/js/pie/index","component_desc":"饼状图","component_id":1}}]';
+var components = '[{"com":{"component_name":"text","component_path":"components/js/text/index","component_desc":"文本"}}]';
 
 var App = function (_React$Component2) {
     _inherits(App, _React$Component2);

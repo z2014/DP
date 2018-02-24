@@ -16,5 +16,6 @@ export default function request(url, opts) {
         }
     }).then(res => {
         console.log(`'${url}'   `, res)
+        return res
     })
 }
