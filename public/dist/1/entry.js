@@ -1,4 +1,4 @@
-webpackJsonp([2],{
+webpackJsonp([8],{
 
 /***/ 15:
 /***/ (function(module, exports, __webpack_require__) {
@@ -64,7 +64,7 @@ var Component = function (_React$Component) {
 
             if (children.com.component_name === 'text') {
                 return function (ctx) {
-                    __webpack_require__.e/* require.ensure */(1).then((function (require) {
+                    __webpack_require__.e/* require.ensure */(6).then((function (require) {
                         ctx.state.com = __webpack_require__(30);
                         ctx.setState({});
                     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
@@ -75,6 +75,60 @@ var Component = function (_React$Component) {
                 return function (ctx) {
                     __webpack_require__.e/* require.ensure */(0).then((function (require) {
                         ctx.state.com = __webpack_require__(31);
+                        ctx.setState({});
+                    }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+                };
+            }
+
+            if (children.com.component_name === 'barChart') {
+                return function (ctx) {
+                    __webpack_require__.e/* require.ensure */(4).then((function (require) {
+                        ctx.state.com = __webpack_require__(32);
+                        ctx.setState({});
+                    }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+                };
+            }
+
+            if (children.com.component_name === 'lineChart') {
+                return function (ctx) {
+                    __webpack_require__.e/* require.ensure */(2).then((function (require) {
+                        ctx.state.com = __webpack_require__(33);
+                        ctx.setState({});
+                    }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+                };
+            }
+
+            if (children.com.component_name === 'mapChart') {
+                return function (ctx) {
+                    __webpack_require__.e/* require.ensure */(1).then((function (require) {
+                        ctx.state.com = __webpack_require__(34);
+                        ctx.setState({});
+                    }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+                };
+            }
+
+            if (children.com.component_name === 'funnelChart') {
+                return function (ctx) {
+                    __webpack_require__.e/* require.ensure */(3).then((function (require) {
+                        ctx.state.com = __webpack_require__(35);
+                        ctx.setState({});
+                    }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+                };
+            }
+
+            if (children.com.component_name === 'link') {
+                return function (ctx) {
+                    __webpack_require__.e/* require.ensure */(7).then((function (require) {
+                        ctx.state.com = __webpack_require__(36);
+                        ctx.setState({});
+                    }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+                };
+            }
+
+            if (children.com.component_name === 'layout') {
+                return function (ctx) {
+                    __webpack_require__.e/* require.ensure */(5).then((function (require) {
+                        ctx.state.com = __webpack_require__(37);
                         ctx.setState({});
                     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
                 };
@@ -121,7 +175,7 @@ var Component = function (_React$Component) {
 exports.default = Component;
 
 
-var components = '[{"com":{"component_name":"text","component_path":"components/js/text/index","component_desc":"文本","component_meta":{"label":{"name":"文本组件","type":"string"},"content":{"name":"文本内容","type":"string"}},"component_id":0}},{"com":{"component_name":"pieChart","component_path":"components/js/pie/index","component_desc":"饼状图","component_id":1}}]';
+var components = '[{"com":{"component_name":"layout","component_path":"components/js/layout/index","component_desc":"布局","component_meta":{"url":{"name":"获取数据","type":"string"},"content":{"name":"路由信息","type":"jsoneditor","value":{"性能监控":"//localhost:4040/preview/pc/2","流量转化":"//localhost:4040/preview/pc/3"}}},"component_id":0}}]';
 
 var App = function (_React$Component2) {
     _inherits(App, _React$Component2);

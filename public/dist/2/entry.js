@@ -1,4 +1,4 @@
-webpackJsonp([2],{
+webpackJsonp([8],{
 
 /***/ 15:
 /***/ (function(module, exports, __webpack_require__) {
@@ -53,6 +53,8 @@ var Component = function (_React$Component) {
         _this.state = {
             com: ''
         };
+        _this.edit = _this.edit.bind(_this);
+        _this.close = _this.close.bind(_this);
         return _this;
     }
 
@@ -62,7 +64,7 @@ var Component = function (_React$Component) {
 
             if (children.com.component_name === 'text') {
                 return function (ctx) {
-                    __webpack_require__.e/* require.ensure */(1).then((function (require) {
+                    __webpack_require__.e/* require.ensure */(6).then((function (require) {
                         ctx.state.com = __webpack_require__(30);
                         ctx.setState({});
                     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
@@ -77,6 +79,60 @@ var Component = function (_React$Component) {
                     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
                 };
             }
+
+            if (children.com.component_name === 'barChart') {
+                return function (ctx) {
+                    __webpack_require__.e/* require.ensure */(4).then((function (require) {
+                        ctx.state.com = __webpack_require__(32);
+                        ctx.setState({});
+                    }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+                };
+            }
+
+            if (children.com.component_name === 'lineChart') {
+                return function (ctx) {
+                    __webpack_require__.e/* require.ensure */(2).then((function (require) {
+                        ctx.state.com = __webpack_require__(33);
+                        ctx.setState({});
+                    }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+                };
+            }
+
+            if (children.com.component_name === 'mapChart') {
+                return function (ctx) {
+                    __webpack_require__.e/* require.ensure */(1).then((function (require) {
+                        ctx.state.com = __webpack_require__(34);
+                        ctx.setState({});
+                    }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+                };
+            }
+
+            if (children.com.component_name === 'funnelChart') {
+                return function (ctx) {
+                    __webpack_require__.e/* require.ensure */(3).then((function (require) {
+                        ctx.state.com = __webpack_require__(35);
+                        ctx.setState({});
+                    }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+                };
+            }
+
+            if (children.com.component_name === 'link') {
+                return function (ctx) {
+                    __webpack_require__.e/* require.ensure */(7).then((function (require) {
+                        ctx.state.com = __webpack_require__(36);
+                        ctx.setState({});
+                    }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+                };
+            }
+
+            if (children.com.component_name === 'layout') {
+                return function (ctx) {
+                    __webpack_require__.e/* require.ensure */(5).then((function (require) {
+                        ctx.state.com = __webpack_require__(37);
+                        ctx.setState({});
+                    }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+                };
+            }
         }
     }, {
         key: 'componentDidMount',
@@ -87,16 +143,27 @@ var Component = function (_React$Component) {
             }
         }
     }, {
+        key: 'edit',
+        value: function edit() {
+            this.props.renderModal(this.props.com.com);
+        }
+    }, {
+        key: 'close',
+        value: function close() {
+            this.props.removeComponent(this.props.com);
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
                 'div',
                 { className: 'basic-component' },
-                _react2.default.createElement(
+                false ? _react2.default.createElement(
                     'div',
                     { className: 'btn-nav' },
-                    _react2.default.createElement('i', { className: 'iconfont icon-MapEditing' })
-                ),
+                    _react2.default.createElement('img', { src: '/edit.png', className: 'btn-oper', onClick: this.edit }),
+                    _react2.default.createElement('img', { src: '/close.png', className: 'btn-oper', onClick: this.close })
+                ) : null,
                 this.state.com ? _react2.default.createElement(this.state.com, this.props) : null
             );
         }
@@ -108,7 +175,7 @@ var Component = function (_React$Component) {
 exports.default = Component;
 
 
-var components = '[{"com":{"component_name":"text","component_path":"components/js/text/index","component_desc":"文本"}}]';
+var components = '[{"com":{"component_name":"text","component_path":"components/js/text/index","component_desc":"文本","component_meta":{"label":{"name":"文本组件","type":"string"},"content":{"name":"文本内容","type":"string","value":"ffff"},"style":{"name":"样式","type":"radio","def":"style","options":{"center":"居中","left":"居左","right":"居右"}}},"component_id":0}},{"com":{"component_name":"funnelChart","component_path":"components/js/funnel/index","component_desc":"漏斗图","component_meta":{"url":{"name":"获取数据","type":"string"},"content":{"name":"文本内容","type":"string"}},"component_id":1}}]';
 
 var App = function (_React$Component2) {
     _inherits(App, _React$Component2);

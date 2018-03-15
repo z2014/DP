@@ -85,8 +85,9 @@ export default class MainPanel extends React.Component {
         })
         return connectDropTarget(
             <div className='mainpanel'>
-                这是主页
-                { coms }
+                {
+                    coms.length !== 0 ?  coms : <div className="main-basic">从左侧拖动组件过来</div>
+                }
                 {
                     this.state.isshow ? 
                         <Modal>

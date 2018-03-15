@@ -33,6 +33,60 @@
                 }
             }
         
+            if (children.com.component_name === 'barChart') {
+                return (ctx) => {
+                    require.ensure([], (require) => {
+                        ctx.state.com = require('/Users/a2014/Desktop/project/scripts/components/js/bar/index')
+                        ctx.setState({})
+                    }, 'barChart')
+                }
+            }
+        
+            if (children.com.component_name === 'lineChart') {
+                return (ctx) => {
+                    require.ensure([], (require) => {
+                        ctx.state.com = require('/Users/a2014/Desktop/project/scripts/components/js/line/index')
+                        ctx.setState({})
+                    }, 'lineChart')
+                }
+            }
+        
+            if (children.com.component_name === 'mapChart') {
+                return (ctx) => {
+                    require.ensure([], (require) => {
+                        ctx.state.com = require('/Users/a2014/Desktop/project/scripts/components/js/map/index')
+                        ctx.setState({})
+                    }, 'mapChart')
+                }
+            }
+        
+            if (children.com.component_name === 'funnelChart') {
+                return (ctx) => {
+                    require.ensure([], (require) => {
+                        ctx.state.com = require('/Users/a2014/Desktop/project/scripts/components/js/funnel/index')
+                        ctx.setState({})
+                    }, 'funnelChart')
+                }
+            }
+        
+            if (children.com.component_name === 'link') {
+                return (ctx) => {
+                    require.ensure([], (require) => {
+                        ctx.state.com = require('/Users/a2014/Desktop/project/scripts/components/js/link/index')
+                        ctx.setState({})
+                    }, 'link')
+                }
+            }
+        
+            if (children.com.component_name === 'layout') {
+                return (ctx) => {
+                    require.ensure([], (require) => {
+                        ctx.state.com = require('/Users/a2014/Desktop/project/scripts/components/js/layout/index')
+                        ctx.setState({})
+                    }, 'layout')
+                }
+            }
+        
         }
 
         componentDidMount() {

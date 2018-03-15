@@ -2,10 +2,48 @@ module.exports = [{
     'component_name': 'text',
     'component_path': 'components/js/text/index',
     'component_desc': '文本',
-    'component_meta': require('./meta/config_text.js')
+    'component_meta': require('./meta/config_text.js'),
+    'component_type': 'chart'
 }, {
     'component_name': 'pieChart',
     'component_path': 'components/js/pie/index',
     'component_desc': '饼状图',
-    'component_meta': require('./meta/config_pie.js')
+    'component_meta': require('./meta/config_pie.js'),
+    'component_type': 'chart'
+}, {
+    'component_name': 'barChart',
+    'component_path': 'components/js/bar/index',
+    'component_desc': '柱状图',
+    'component_meta': require('./meta/config_bar.js'),
+    'component_type': 'chart'
+}, {
+    'component_name': 'lineChart',
+    'component_path': 'components/js/line/index',
+    'component_desc': '折线图',
+    'component_meta': require('./meta/config_line.js'),
+    'component_type': 'chart'
+}, {
+    'component_name': 'mapChart',
+    'component_path': 'components/js/map/index',
+    'component_desc': '热力图',
+    'component_meta': require('./meta/config_map.js'),
+    'component_type': 'chart'
+}, {
+    'component_name': 'funnelChart',
+    'component_path': 'components/js/funnel/index',
+    'component_desc': '漏斗图',
+    'component_meta': require('./meta/config_funnel.js'),
+    'component_type': 'chart'
+}, {
+    'component_name': 'link',
+    'component_path': 'components/js/link/index',
+    'component_desc': '链接',
+    'component_meta': require('./meta/config_link.js'),
+    'component_type': 'chart'
+}, {
+    'component_name': 'layout',
+    'component_path': 'components/js/layout/index',
+    'component_desc': '侧边栏',
+    'component_meta': require('./meta/config_layout.js'),
+    'component_type': 'layout'
 }]

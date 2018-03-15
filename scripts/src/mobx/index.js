@@ -23,7 +23,9 @@ class Store {
             if (com.com.component_id === metaVal.component_id) {
                 const keys = Object.keys(com.com.component_meta)
                 keys.map(key => {
-                    com.com.component_meta[key].value = metaVal[key]
+                    if (metaVal.hasOwnProperty(key)) {
+                        com.com.component_meta[key].value = metaVal[key]
+                    }
                 })
             }
         })

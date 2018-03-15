@@ -1,9 +1,10 @@
 import * as echarts from 'echarts'
 import React from 'react'
 
-export default class pieChart extends React.Component{
+export default class PieChart extends React.Component{
     constructor(props) {
         super(props)
+        this.config = this.props.com.com.component_meta
     }
     componentDidMount() {
         const option = {

@@ -1,7 +1,3 @@
-* {
-  margin: 0;
-  bottom: 0;
-}
 .main {
   color: red;
 }
@@ -20,9 +16,37 @@
   min-height: 600px;
   border-right: 2px solid #ccc;
 }
+.tab-bar {
+  width: 100%;
+  box-sizing: border-box;
+  line-height: 40px;
+  border: 1px solid #eee;
+  text-align: center;
+  background-color: #eee;
+  border-radius: 10px;
+}
+.tab-child {
+  transition: all 0.5 0 linear;
+  overflow: hidden;
+}
 .mainpanel {
+  position: relative;
   flex: 4;
   min-height: 600px;
+}
+.main-basic {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  padding: auto;
+  width: 200px;
+  height: 50px;
+  border: 2px dashed #eee;
+  text-align: center;
+  line-height: 50px;
 }
 .com {
   width: 50%;
@@ -65,7 +89,7 @@
 .modal-wrapper {
   height: 100%;
   width: 100%;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
@@ -103,6 +127,14 @@
 .meta-input input {
   width: 200px;
 }
+.meta-radio {
+  flex: 5;
+  display: flex;
+  justify-content: space-around;
+}
+.meta-radio input {
+  margin-right: 10px;
+}
 .btn-bottom {
   position: absolute;
   display: flex;
@@ -134,7 +166,21 @@
   border-radius: 15px;
   border: 1px solid #ccc;
 }
+.icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: 0 auto;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-image: url('/img/up.png');
+}
 a {
   text-decoration: none;
   color: black;
+}
+* {
+  margin: 0;
+  padding: 0;
 }

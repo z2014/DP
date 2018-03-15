@@ -17,6 +17,10 @@ export default class Nav extends React.Component {
         const config = this.props.store.config.slice()
         savePage(config, window.info.pageId)
     }
+
+    preview = () => {
+        window.open('//localhost:4040/preview/pc/' + window.info.pageId)
+    }
     render () {
         return (
             <div className='nav'>
@@ -24,8 +28,7 @@ export default class Nav extends React.Component {
                 <span className="preview-btn" onClick={this.save}>保存</span>
                 <a className="preview-btn" onClick={this.build}
                 >生成</a>
-                <a  href="//localhost:4040/preview/pc/1"
-                    target="blank"
+                <a  onClick={this.preview}
                     className="preview-btn"
                 >预览</a>
             </div>

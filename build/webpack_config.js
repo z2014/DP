@@ -40,11 +40,11 @@ const webpackConfig = function(entry, output, pageId) {
             }]
         },
         plugins: [
-            new HtmlWebpackPlugin({
-                template: './scripts/template/index.html',
-                chunks: ['entry', 'vendor'],
-                filename: '../../../templates/preview.ejs'
-            }),
+            // new HtmlWebpackPlugin({
+            //     template: './scripts/template/index.html',
+            //     chunks: ['entry', 'vendor'],
+            //     filename: '../../../templates/preview.ejs'
+            // }),
             new webpack.optimize.CommonsChunkPlugin({
                 name: 'vendor',
                 chunks: 'vendor'

@@ -1,17 +1,25 @@
 import '../../style/index'
 import React from 'react'
 import { DragSource } from 'react-dnd'
+import TabBar from './tabBar'
 
 export default class SideBar extends React.Component {
-    renderCom (coms) {
+    renderCom (coms, type) {
         return coms.map((com, index) => {
-            return <DragDiv com={com} key={index}/>
+            if (com.component_type === type) {
+                return <DragDiv com={com} key={index}/>
+            }
         })
     }
     render () {
         return (
             <div className="sidebar">
-                { this.renderCom(this.props.config) }
+                <TabBar type="布局类">
+                    { this.renderCom(this.props.config, 'layout') }
+                </TabBar>
+                <TabBar type="图表类">
+                    { this.renderCom(this.props.config, 'chart') }
+                </TabBar>
             </div>
         )
     }
@@ -31,7 +39,7 @@ const DivSource = {
         // const item = monitor.getItem()
         // let com = require('../components/js/text/index')
         // console.log('com', com)
-        return {}// com}
+        return {}
     }
 }
 
