@@ -42,7 +42,7 @@ export default class MapChart extends React.Component{
             [29,134,96,165,2.76,83,41,'轻度污染'],
             [30,52,24,60,1.03,50,21,'良'],
             [31,46,5,49,0.28,10,6,'优']
-        ];
+        ]
 
         var dataGZ = [
             [1,26,37,27,1.163,27,13,'优'],
@@ -76,7 +76,7 @@ export default class MapChart extends React.Component{
             [29,82,92,174,3.29,0,13,'良'],
             [30,106,116,188,3.628,101,16,'轻度污染'],
             [31,118,50,0,1.383,76,11,'轻度污染']
-        ];
+        ]
 
         var dataSH = [
             [1,91,45,125,0.82,34,23,'良'],
@@ -158,7 +158,7 @@ export default class MapChart extends React.Component{
                 borderColor: '#777',
                 borderWidth: 1,
                 formatter: function (obj) {
-                    var value = obj.value;
+                    var value = obj.value
                     return '<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 18px;padding-bottom: 7px;margin-bottom: 7px">'
                         + obj.seriesName + ' ' + value[0] + '日：'
                         + value[7]
@@ -168,7 +168,7 @@ export default class MapChart extends React.Component{
                         + schema[3].text + '：' + value[3] + '<br>'
                         + schema[4].text + '：' + value[4] + '<br>'
                         + schema[5].text + '：' + value[5] + '<br>'
-                        + schema[6].text + '：' + value[6] + '<br>';
+                        + schema[6].text + '：' + value[6] + '<br>'
                 }
             },
             xAxis: {

@@ -20,13 +20,9 @@ export default class Layout extends React.Component{
         const iframe = document.getElementById('iframe')
         const wrapper = document.getElementsByClassName('layout-iframe')[0]
         iframe.width = wrapper.offsetWidth
-        var bHeight = iframe.contentWindow.document.body.scrollHeight
-        var dHeight = iframe.contentWindow.document.documentElement.scrollHeight
-        console.log(bHeight, dHeight)
     }
 
     render() {
-        console.log(this.config.content.value)
         return (
             <div className="layout-wrapper">
                 <div className="layout-side">

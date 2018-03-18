@@ -1,12 +1,22 @@
 import * as echarts from 'echarts'
 import React from 'react'
+import Wrapper from '../common/chart'
 
-export default class FunnelChart extends React.Component{
+class FunnelChart extends React.Component{
     constructor(props) {
         super(props)
         this.config = this.props.com.com.component_meta
     }
+
     componentDidMount() {
+        this.renderFunnel(this.props.data)
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.renderFunnel(nextProps.data)
+    }
+
+    renderFunnel = (props) => {
         var dom = document.getElementById('funnelChart')
         var mychart = echarts.init(dom)
         var option = {
@@ -26,7 +36,7 @@ export default class FunnelChart extends React.Component{
                 }
             },
             legend: {
-                data: ['展现','点击','访问','咨询','订单']
+                data: props.legend
             },
             calculable: true,
             series: [
@@ -71,13 +81,7 @@ export default class FunnelChart extends React.Component{
                             borderWidth: 1
                         }
                     },
-                    data: [
-                        {value: 60, name: '访问'},
-                        {value: 40, name: '咨询'},
-                        {value: 20, name: '订单'},
-                        {value: 80, name: '点击'},
-                        {value: 100, name: '展现'}
-                    ]
+                    data: props.data
                 }
             ]
         }
@@ -91,3 +95,5 @@ export default class FunnelChart extends React.Component{
         )
     }
 }
+
+export default Wrapper(FunnelChart)

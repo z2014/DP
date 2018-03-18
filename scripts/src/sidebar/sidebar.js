@@ -14,6 +14,9 @@ export default class SideBar extends React.Component {
     render () {
         return (
             <div className="sidebar">
+                <TabBar type="筛选类">
+                    { this.renderCom(this.props.config, 'filter') }
+                </TabBar>
                 <TabBar type="布局类">
                     { this.renderCom(this.props.config, 'layout') }
                 </TabBar>

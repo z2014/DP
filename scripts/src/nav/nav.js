@@ -25,12 +25,14 @@ export default class Nav extends React.Component {
         return (
             <div className='nav'>
                 拖动生成页面工具
-                <span className="preview-btn" onClick={this.save}>保存</span>
-                <a className="preview-btn" onClick={this.build}
-                >生成</a>
-                <a  onClick={this.preview}
-                    className="preview-btn"
-                >预览</a>
+                <div className="nav-wrapper">
+                    <span className="preview-btn" onClick={this.save}>保存</span>
+                    <span className="preview-btn" onClick={this.build}
+                    >生成</span>
+                    <span  onClick={this.preview}
+                        className="preview-btn"
+                    >预览</span>
+                </div>
             </div>
         )
     }

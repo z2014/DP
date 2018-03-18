@@ -1,4 +1,4 @@
-webpackJsonp([5],{
+webpackJsonp([11],{
 
 /***/ 108:
 /***/ (function(module, exports) {
@@ -552,7 +552,7 @@ function updateLink (link, options, obj) {
 
 /***/ }),
 
-/***/ 315:
+/***/ 803:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -569,7 +569,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(797);
+__webpack_require__(804);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -579,89 +579,45 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Layout = function (_React$Component) {
-    _inherits(Layout, _React$Component);
+var SearchInput = function (_React$Component) {
+    _inherits(SearchInput, _React$Component);
 
-    function Layout(props) {
-        _classCallCheck(this, Layout);
+    function SearchInput() {
+        _classCallCheck(this, SearchInput);
 
-        var _this = _possibleConstructorReturn(this, (Layout.__proto__ || Object.getPrototypeOf(Layout)).call(this, props));
-
-        _this.config = _this.props.com.com.component_meta;
-        _this.state = {
-            url: Object.keys(_this.config.content.value)[0]
-        };
-        return _this;
+        return _possibleConstructorReturn(this, (SearchInput.__proto__ || Object.getPrototypeOf(SearchInput)).apply(this, arguments));
     }
 
-    _createClass(Layout, [{
-        key: 'changeUrl',
-        value: function changeUrl(ev) {
-            this.setState({
-                url: ev.target.innerHTML
-            });
-        }
-    }, {
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            var iframe = document.getElementById('iframe');
-            var wrapper = document.getElementsByClassName('layout-iframe')[0];
-            iframe.width = wrapper.offsetWidth;
-        }
-    }, {
+    _createClass(SearchInput, [{
         key: 'render',
         value: function render() {
-            var _this2 = this;
-
             return _react2.default.createElement(
                 'div',
-                { className: 'layout-wrapper' },
+                null,
                 _react2.default.createElement(
                     'div',
-                    { className: 'layout-side' },
-                    this.config.content.value ? Object.keys(this.config.content.value).map(function (key, index) {
-                        if (key === _this2.state.url) {
-                            return _react2.default.createElement(
-                                'span',
-                                { key: index, className: 'layout-item layout-select', onClick: function onClick(ev) {
-                                        return _this2.changeUrl(ev);
-                                    } },
-                                key
-                            );
-                        }
-                        return _react2.default.createElement(
-                            'span',
-                            { key: index, className: 'layout-item', onClick: function onClick(ev) {
-                                    return _this2.changeUrl(ev);
-                                } },
-                            key
-                        );
-                    }) : null
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'layout-iframe' },
-                    _react2.default.createElement('iframe', { src: this.config.content.value[this.state.url], id: 'iframe', ref: 'iframe', width: '600px', height: '800px', frameBorder: '0' })
+                    { contentEditable: 'true', className: 'searchinput' },
+                    _react2.default.createElement('i', { className: 'icon icon-search' })
                 )
             );
         }
     }]);
 
-    return Layout;
+    return SearchInput;
 }(_react2.default.Component);
 
-exports.default = Layout;
+exports.default = SearchInput;
 module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 797:
+/***/ 804:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(798);
+var content = __webpack_require__(805);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -675,8 +631,8 @@ if(content.locals) module.exports = content.locals;
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/less-loader/dist/cjs.js!./layout.less", function() {
-			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/less-loader/dist/cjs.js!./layout.less");
+		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/less-loader/dist/cjs.js!./searchinput.less", function() {
+			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/less-loader/dist/cjs.js!./searchinput.less");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -687,7 +643,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 798:
+/***/ 805:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(306)(false);
@@ -695,7 +651,7 @@ exports = module.exports = __webpack_require__(306)(false);
 
 
 // module
-exports.push([module.i, ".layout-wrapper {\n  overflow: hidden;\n}\n.layout-side {\n  float: left;\n  width: 100px;\n  margin-bottom: -9999px;\n  padding-bottom: 9999px;\n  border: 1px solid #eee;\n}\n.layout-iframe {\n  float: left;\n  min-height: 200px;\n}\n.layout-item {\n  display: block;\n  width: 100%;\n  box-sizing: border-box;\n  text-align: center;\n  padding: 10px;\n  background-color: #eee;\n  cursor: pointer;\n}\n.layout-select {\n  background-color: #ccc;\n}\n", ""]);
+exports.push([module.i, ".searchinput {\n  width: 40px;\n  height: 24px;\n  border: 1px solid #eee;\n  position: absolute;\n  right: 0px;\n  transition: all 0.5s 0s linear;\n}\n.searchinput:hover {\n  width: 200px;\n}\n.icon {\n  display: inline-block;\n  width: 20px;\n  height: 20px;\n  margin: 0 auto;\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: cover;\n}\n.icon-search {\n  background-image: url('/img/search.png');\n  position: absolute;\n  right: 0px;\n}\n", ""]);
 
 // exports
 

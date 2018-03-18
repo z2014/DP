@@ -1,12 +1,22 @@
 import * as echarts from 'echarts'
 import React from 'react'
+import Wrapper from '../common/chart'
 
-export default class PieChart extends React.Component{
+class PieChart extends React.Component{
     constructor(props) {
         super(props)
         this.config = this.props.com.com.component_meta
     }
+
+    componentWillReceiveProps(nextProps) {
+        this.renderPie(nextProps.data)
+    }
+
     componentDidMount() {
+        this.renderPie(this.props.data)    
+    }
+
+    renderPie = (props) => {
         const option = {
             backgroundColor: '#2c343c',
 
@@ -38,13 +48,7 @@ export default class PieChart extends React.Component{
                     type:'pie',
                     radius : '55%',
                     center: ['50%', '50%'],
-                    data:[
-                        {value:335, name:'直接访问'},
-                        {value:310, name:'邮件营销'},
-                        {value:274, name:'联盟广告'},
-                        {value:235, name:'视频广告'},
-                        {value:400, name:'搜索引擎'}
-                    ].sort(function (a, b) { return a.value - b.value }),
+                    data: props.data.sort(function (a, b) { return a.value - b.value }),
                     roseType: 'radius',
                     label: {
                         normal: {
@@ -88,3 +92,5 @@ export default class PieChart extends React.Component{
         )
     }
 }
+
+export default Wrapper(PieChart)

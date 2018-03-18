@@ -17,7 +17,7 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(519);
+__webpack_require__(522);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -37,7 +37,7 @@ var Layout = function (_React$Component) {
 
         _this.config = _this.props.com.com.component_meta;
         _this.state = {
-            url: '//localhost:4040/preview/pc/2'
+            url: Object.keys(_this.config.content.value)[0]
         };
         return _this;
     }
@@ -45,9 +45,8 @@ var Layout = function (_React$Component) {
     _createClass(Layout, [{
         key: 'changeUrl',
         value: function changeUrl(ev) {
-            console.log(ev.target.innerHTML, this.config.content.value);
             this.setState({
-                url: this.config.content.value[ev.target.innerHTML]
+                url: ev.target.innerHTML
             });
         }
     }, {
@@ -73,6 +72,15 @@ var Layout = function (_React$Component) {
                     'div',
                     { className: 'layout-side' },
                     this.config.content.value ? Object.keys(this.config.content.value).map(function (key, index) {
+                        if (key === _this2.state.url) {
+                            return _react2.default.createElement(
+                                'span',
+                                { key: index, className: 'layout-item layout-select', onClick: function onClick(ev) {
+                                        return _this2.changeUrl(ev);
+                                    } },
+                                key
+                            );
+                        }
                         return _react2.default.createElement(
                             'span',
                             { key: index, className: 'layout-item', onClick: function onClick(ev) {
@@ -85,7 +93,7 @@ var Layout = function (_React$Component) {
                 _react2.default.createElement(
                     'div',
                     { className: 'layout-iframe' },
-                    _react2.default.createElement('iframe', { src: this.state.url, id: 'iframe', ref: 'iframe', width: '600px', height: '600px', frameBorder: '0' })
+                    _react2.default.createElement('iframe', { src: this.config.content.value[this.state.url], id: 'iframe', ref: 'iframe', width: '600px', height: '800px', frameBorder: '0' })
                 )
             );
         }
@@ -99,13 +107,13 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 519:
+/***/ 522:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(520);
+var content = __webpack_require__(523);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -113,7 +121,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(522)(content, options);
+var update = __webpack_require__(525)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -131,10 +139,10 @@ if(false) {
 
 /***/ }),
 
-/***/ 520:
+/***/ 523:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(521)(false);
+exports = module.exports = __webpack_require__(524)(false);
 // imports
 
 
@@ -146,7 +154,7 @@ exports.push([module.i, ".layout-wrapper {\n  overflow: hidden;\n}\n.layout-side
 
 /***/ }),
 
-/***/ 521:
+/***/ 524:
 /***/ (function(module, exports) {
 
 /*
@@ -229,7 +237,7 @@ function toComment(sourceMap) {
 
 /***/ }),
 
-/***/ 522:
+/***/ 525:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -285,7 +293,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(523);
+var	fixUrls = __webpack_require__(526);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -602,7 +610,7 @@ function updateLink (link, options, obj) {
 
 /***/ }),
 
-/***/ 523:
+/***/ 526:
 /***/ (function(module, exports) {
 
 

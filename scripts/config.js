@@ -46,4 +46,16 @@ module.exports = [{
     'component_desc': '侧边栏',
     'component_meta': require('./meta/config_layout.js'),
     'component_type': 'layout'
+}, {
+    'component_name': 'datePicker',
+    'component_path': 'components/js/datePicker/index',
+    'component_desc': '时间选择器',
+    'component_meta': require('./meta/config_datePicker.js'),
+    'component_type': 'filter'
+}, {
+    'component_name': 'searchInput',
+    'component_path': 'components/js/searchInput/index',
+    'component_desc': '输入搜索框',
+    'component_meta': require('./meta/config_searchInput.js'),
+    'component_type': 'filter'
 }]

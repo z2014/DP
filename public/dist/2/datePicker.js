@@ -1,6 +1,6 @@
-webpackJsonp([7],{
+webpackJsonp([8],{
 
-/***/ 314:
+/***/ 38:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13,7 +13,7 @@ exports.default = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(0);
+var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -25,37 +25,30 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Link = function (_React$Component) {
-    _inherits(Link, _React$Component);
+var DatePicker = function (_React$Component) {
+    _inherits(DatePicker, _React$Component);
 
-    function Link(props) {
-        _classCallCheck(this, Link);
+    function DatePicker() {
+        _classCallCheck(this, DatePicker);
 
-        var _this = _possibleConstructorReturn(this, (Link.__proto__ || Object.getPrototypeOf(Link)).call(this, props));
-
-        _this.config = _this.props.com.com.component_meta;
-        return _this;
+        return _possibleConstructorReturn(this, (DatePicker.__proto__ || Object.getPrototypeOf(DatePicker)).apply(this, arguments));
     }
 
-    _createClass(Link, [{
+    _createClass(DatePicker, [{
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(
-                    'a',
-                    { href: this.config.url.value ? this.config.url.value : '', target: this.config.location.value === 'yes' ? 'blank' : '' },
-                    this.config.text.value
-                )
+                'jjj'
             );
         }
     }]);
 
-    return Link;
+    return DatePicker;
 }(_react2.default.Component);
 
-exports.default = Link;
+exports.default = DatePicker;
 module.exports = exports['default'];
 
 /***/ })

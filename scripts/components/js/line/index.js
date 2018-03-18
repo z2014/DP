@@ -1,12 +1,22 @@
 import * as echarts from 'echarts'
 import React from 'react'
+import Wrapper from '../common/chart'
 
-export default class LineChart extends React.Component{
+class LineChart extends React.Component{
     constructor(props) {
         super(props)
         this.config = this.props.com.com.component_meta
     }
+
     componentDidMount() {
+        this.renderLine(this.props.data)
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.renderLine(nextProps.data)
+    }
+    
+    renderLine = (props) => {
         var dom = document.getElementById('lineChart')
         var myChart = echarts.init(dom)
         var option = null
@@ -24,7 +34,7 @@ export default class LineChart extends React.Component{
                 }
             },
             legend: {
-                data:['邮件营销','联盟广告','视频广告','直接访问','搜索引擎']
+                data: props.legend
             },
             toolbox: {
                 feature: {
@@ -41,7 +51,7 @@ export default class LineChart extends React.Component{
                 {
                     type : 'category',
                     boundaryGap : false,
-                    data : ['周一','周二','周三','周四','周五','周六','周日']
+                    data : props.xaxis
                 }
             ],
             yAxis : [
@@ -49,49 +59,7 @@ export default class LineChart extends React.Component{
                     type : 'value'
                 }
             ],
-            series : [
-                {
-                    name:'邮件营销',
-                    type:'line',
-                    stack: '总量',
-                    areaStyle: {normal: {}},
-                    data:[120, 132, 101, 134, 90, 230, 210]
-                },
-                {
-                    name:'联盟广告',
-                    type:'line',
-                    stack: '总量',
-                    areaStyle: {normal: {}},
-                    data:[220, 182, 191, 234, 290, 330, 310]
-                },
-                {
-                    name:'视频广告',
-                    type:'line',
-                    stack: '总量',
-                    areaStyle: {normal: {}},
-                    data:[150, 232, 201, 154, 190, 330, 410]
-                },
-                {
-                    name:'直接访问',
-                    type:'line',
-                    stack: '总量',
-                    areaStyle: {normal: {}},
-                    data:[320, 332, 301, 334, 390, 330, 320]
-                },
-                {
-                    name:'搜索引擎',
-                    type:'line',
-                    stack: '总量',
-                    label: {
-                        normal: {
-                            show: true,
-                            position: 'top'
-                        }
-                    },
-                    areaStyle: {normal: {}},
-                    data:[820, 932, 901, 934, 1290, 1330, 1320]
-                }
-            ]
+            series : props.data
         }
         if (option && typeof option === "object") {
             myChart.setOption(option, true)
@@ -103,3 +71,4 @@ export default class LineChart extends React.Component{
         )
     }
 }
+export default Wrapper(LineChart)

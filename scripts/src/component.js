@@ -87,6 +87,24 @@
                 }
             }
         
+            if (children.com.component_name === 'datePicker') {
+                return (ctx) => {
+                    require.ensure([], (require) => {
+                        ctx.state.com = require('/Users/a2014/Desktop/project/scripts/components/js/datePicker/index')
+                        ctx.setState({})
+                    }, 'datePicker')
+                }
+            }
+        
+            if (children.com.component_name === 'searchInput') {
+                return (ctx) => {
+                    require.ensure([], (require) => {
+                        ctx.state.com = require('/Users/a2014/Desktop/project/scripts/components/js/searchInput/index')
+                        ctx.setState({})
+                    }, 'searchInput')
+                }
+            }
+        
         }
 
         componentDidMount() {
@@ -110,8 +128,8 @@
                     {
                         true ? 
                         (<div className="btn-nav">
-                            <img src="/edit.png" className="btn-oper" onClick={this.edit}/>
-                            <img src="/close.png" className="btn-oper" onClick={this.close}/>
+                            <img src="/img/edit.png" className="btn-oper" onClick={this.edit}/>
+                            <img src="/img/close.png" className="btn-oper" onClick={this.close}/>
                         </div>) : null
                     }
                     { this.state.com ? React.createElement(this.state.com, this.props) : null }     
