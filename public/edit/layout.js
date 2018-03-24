@@ -1,6 +1,6 @@
-webpackJsonp([5],{
+webpackJsonp([9],{
 
-/***/ 108:
+/***/ 109:
 /***/ (function(module, exports) {
 
 
@@ -96,7 +96,7 @@ module.exports = function (css) {
 
 /***/ }),
 
-/***/ 306:
+/***/ 308:
 /***/ (function(module, exports) {
 
 /*
@@ -179,7 +179,7 @@ function toComment(sourceMap) {
 
 /***/ }),
 
-/***/ 307:
+/***/ 309:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -235,7 +235,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(108);
+var	fixUrls = __webpack_require__(109);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -552,7 +552,7 @@ function updateLink (link, options, obj) {
 
 /***/ }),
 
-/***/ 315:
+/***/ 320:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -563,13 +563,31 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = undefined;
 
+var _dec, _class;
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(797);
+__webpack_require__(802);
+
+var _reactDnd = __webpack_require__(36);
+
+var _component = __webpack_require__(202);
+
+var _component2 = _interopRequireDefault(_component);
+
+var _index = __webpack_require__(203);
+
+var _index2 = _interopRequireDefault(_index);
+
+var _modal = __webpack_require__(264);
+
+var _modal2 = _interopRequireDefault(_modal);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -588,27 +606,10 @@ var Layout = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Layout.__proto__ || Object.getPrototypeOf(Layout)).call(this, props));
 
         _this.config = _this.props.com.com.component_meta;
-        _this.state = {
-            url: Object.keys(_this.config.content.value)[0]
-        };
         return _this;
     }
 
     _createClass(Layout, [{
-        key: 'changeUrl',
-        value: function changeUrl(ev) {
-            this.setState({
-                url: ev.target.innerHTML
-            });
-        }
-    }, {
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            var iframe = document.getElementById('iframe');
-            var wrapper = document.getElementsByClassName('layout-iframe')[0];
-            iframe.width = wrapper.offsetWidth;
-        }
-    }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
@@ -616,33 +617,10 @@ var Layout = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 { className: 'layout-wrapper' },
-                _react2.default.createElement(
-                    'div',
-                    { className: 'layout-side' },
-                    this.config.content.value ? Object.keys(this.config.content.value).map(function (key, index) {
-                        if (key === _this2.state.url) {
-                            return _react2.default.createElement(
-                                'span',
-                                { key: index, className: 'layout-item layout-select', onClick: function onClick(ev) {
-                                        return _this2.changeUrl(ev);
-                                    } },
-                                key
-                            );
-                        }
-                        return _react2.default.createElement(
-                            'span',
-                            { key: index, className: 'layout-item', onClick: function onClick(ev) {
-                                    return _this2.changeUrl(ev);
-                                } },
-                            key
-                        );
-                    }) : null
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'layout-iframe' },
-                    _react2.default.createElement('iframe', { src: this.config.content.value[this.state.url], id: 'iframe', ref: 'iframe', width: '600px', height: '800px', frameBorder: '0' })
-                )
+                this.config.content.value ? Object.keys(this.config.content.value).map(function (key, index) {
+                    var style = { flex: '' + _this2.config.content.value[key] };
+                    return _react2.default.createElement(LayoutItem, _extends({ style: style, key: index }, _this2.props, { index: index }));
+                }) : null
             );
         }
     }]);
@@ -651,17 +629,130 @@ var Layout = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Layout;
+
+
+var ItemTypes = {
+    DRAGDIV: 'dragdiv'
+};
+
+var squareTarget = {
+    drop: function drop(props, monitor, component) {
+        var item = monitor.getItem();
+        item.com.component_id = Symbol(item.component_name);
+        props.store.addChildElement(item, props.index, props.com.com.component_id);
+        // component.handleDrop(item)
+        // props.store.addConfig(item)
+    }
+};
+
+function collect(connect, monitor) {
+    return {
+        connectDropTarget: connect.dropTarget(),
+        isOver: monitor.isOver()
+    };
+}
+
+// layout 作为承载容器
+
+var LayoutItem = (_dec = (0, _reactDnd.DropTarget)(ItemTypes.DRAGDIV, squareTarget, collect), _dec(_class = function (_React$Component2) {
+    _inherits(LayoutItem, _React$Component2);
+
+    function LayoutItem(props) {
+        _classCallCheck(this, LayoutItem);
+
+        var _this3 = _possibleConstructorReturn(this, (LayoutItem.__proto__ || Object.getPrototypeOf(LayoutItem)).call(this, props));
+
+        _this3.removeComponent = function (config) {
+            _this3.props.store.deleteChildElement(config, _this3.props.index, _this3.props.com.com.component_id);
+            _this3.setState({});
+        };
+
+        _this3.renderModal = function (config) {
+            var self = _this3;
+            var meta = (0, _index2.default)({ config: config, setMetaVal: self.setMetaVal });
+            _this3.setState({
+                meta: meta,
+                isshow: true
+            });
+        };
+
+        _this3.confirm = function () {
+            _this3.props.store.updateChildConfig(_this3.props.com.com.component_id, _this3.props.index, _this3.state.metaVal);
+            _this3.setState({
+                isshow: false
+            });
+        };
+
+        _this3.cancel = function () {
+            _this3.setState({
+                isshow: false
+            });
+        };
+
+        _this3.setMetaVal = function (val) {
+            _this3.setState({
+                metaVal: val
+            });
+        };
+
+        _this3.state = {
+            coms: [],
+            meta: 'aa',
+            isshow: false,
+            metaVal: {}
+        };
+        return _this3;
+    }
+
+    _createClass(LayoutItem, [{
+        key: 'render',
+        value: function render() {
+            var _this4 = this;
+
+            var connectDropTarget = this.props.connectDropTarget;
+
+            return connectDropTarget(_react2.default.createElement(
+                'div',
+                { style: this.props.style, className: 'layout-item' },
+                this.props.com.com.component_child && this.props.com.com.component_child[this.props.index] ? this.props.com.com.component_child[this.props.index].map(function (child, index) {
+                    return _react2.default.createElement(_component2.default, { com: child, key: index, removeComponent: _this4.removeComponent, renderModal: _this4.renderModal, store: _this4.props.store });
+                }) : null,
+                this.state.isshow ? _react2.default.createElement(
+                    _modal2.default,
+                    null,
+                    this.state.meta,
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'btn-bottom' },
+                        _react2.default.createElement(
+                            'span',
+                            { className: 'confirm-btn', onClick: this.confirm },
+                            '\u786E\u8BA4'
+                        ),
+                        _react2.default.createElement(
+                            'span',
+                            { className: 'cancel-btn', onClick: this.cancel },
+                            '\u53D6\u6D88'
+                        )
+                    )
+                ) : null
+            ));
+        }
+    }]);
+
+    return LayoutItem;
+}(_react2.default.Component)) || _class);
 module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 797:
+/***/ 802:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(798);
+var content = __webpack_require__(803);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -669,7 +760,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(307)(content, options);
+var update = __webpack_require__(309)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -687,15 +778,15 @@ if(false) {
 
 /***/ }),
 
-/***/ 798:
+/***/ 803:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(306)(false);
+exports = module.exports = __webpack_require__(308)(false);
 // imports
 
 
 // module
-exports.push([module.i, ".layout-wrapper {\n  overflow: hidden;\n}\n.layout-side {\n  float: left;\n  width: 100px;\n  margin-bottom: -9999px;\n  padding-bottom: 9999px;\n  border: 1px solid #eee;\n}\n.layout-iframe {\n  float: left;\n  min-height: 200px;\n}\n.layout-item {\n  display: block;\n  width: 100%;\n  box-sizing: border-box;\n  text-align: center;\n  padding: 10px;\n  background-color: #eee;\n  cursor: pointer;\n}\n.layout-select {\n  background-color: #ccc;\n}\n", ""]);
+exports.push([module.i, ".layout-wrapper {\n  display: flex;\n}\n.layout-item {\n  border: 1px solid #eee;\n  min-height: 100px;\n}\n", ""]);
 
 // exports
 

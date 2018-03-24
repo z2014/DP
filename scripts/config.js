@@ -41,10 +41,10 @@ module.exports = [{
     'component_meta': require('./meta/config_link.js'),
     'component_type': 'chart'
 }, {
-    'component_name': 'layout',
-    'component_path': 'components/js/layout/index',
+    'component_name': 'sidebar',
+    'component_path': 'components/js/sidebar/index',
     'component_desc': '侧边栏',
-    'component_meta': require('./meta/config_layout.js'),
+    'component_meta': require('./meta/config_sidebar.js'),
     'component_type': 'layout'
 }, {
     'component_name': 'datePicker',
@@ -58,4 +58,10 @@ module.exports = [{
     'component_desc': '输入搜索框',
     'component_meta': require('./meta/config_searchInput.js'),
     'component_type': 'filter'
+}, {
+    'component_name': 'layout',
+    'component_path': 'components/js/layout/index',
+    'component_desc': '自定义布局',
+    'component_meta': require('./meta/config_layout.js'),
+    'component_type': 'layout'
 }]

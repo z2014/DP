@@ -99,6 +99,15 @@ import ReactDOM from 'react-dom'
                 }
             }
         
+            if (children.com.component_name === 'searchInput') {
+                return (ctx) => {
+                    require.ensure([], (require) => {
+                        ctx.state.com = require('/Users/a2014/Desktop/project/scripts/components/js/searchInput/index')
+                        ctx.setState({})
+                    }, 'searchInput')
+                }
+            }
+        
         }
 
         componentDidMount() {
@@ -122,8 +131,8 @@ import ReactDOM from 'react-dom'
                     {
                         false ? 
                         (<div className="btn-nav">
-                            <img src="/edit.png" className="btn-oper" onClick={this.edit}/>
-                            <img src="/close.png" className="btn-oper" onClick={this.close}/>
+                            <img src="/img/edit.png" className="btn-oper" onClick={this.edit}/>
+                            <img src="/img/close.png" className="btn-oper" onClick={this.close}/>
                         </div>) : null
                     }
                     { this.state.com ? React.createElement(this.state.com, this.props) : null }     
@@ -134,7 +143,7 @@ import ReactDOM from 'react-dom'
     
 
 
-const components = '[{"com":{"component_name":"text","component_path":"components/js/text/index","component_desc":"文本","component_meta":{"label":{"name":"文本组件","type":"string"},"content":{"name":"文本内容","type":"string","value":"流量页面"},"style":{"name":"样式","type":"radio","def":"style","options":{"center":"居中","left":"居左","right":"居右"}}},"component_id":0}},{"com":{"component_name":"lineChart","component_path":"components/js/line/index","component_desc":"折线图","component_meta":{"url":{"name":"获取数据","type":"string","value":"https://www.easy-mock.com/mock/5aadcefad923ab62b0bb4f4b/project/line"},"content":{"name":"文本内容","type":"string"}},"component_type":"chart","component_id":1}}]'
+const components = '[{"com":{"component_name":"text","component_path":"components/js/text/index","component_desc":"文本","component_meta":{"label":{"name":"文本组件","type":"string"},"content":{"name":"文本内容","type":"string","value":"流量页面"},"style":{"name":"样式","type":"radio","def":"style","options":{"center":"居中","left":"居左","right":"居右"}}},"component_id":0}},{"com":{"component_name":"lineChart","component_path":"components/js/line/index","component_desc":"折线图","component_meta":{"url":{"name":"获取数据","type":"string","value":"https://www.easy-mock.com/mock/5aadcefad923ab62b0bb4f4b/project/line"},"content":{"name":"文本内容","type":"string"}},"component_type":"chart","component_id":1}},{"com":{"component_name":"text","component_path":"components/js/text/index","component_desc":"文本","component_meta":{"label":{"name":"文本组件","type":"string"},"content":{"name":"文本内容","type":"string","value":"将顶焦度计"},"style":{"name":"样式","type":"radio","def":"style","options":{"center":"居中","left":"居左","right":"居右"},"value":"center"}},"component_type":"chart","component_id":2}}]'
 
 class App extends React.Component {
     render() {

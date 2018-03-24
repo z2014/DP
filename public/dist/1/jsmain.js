@@ -81,6 +81,33 @@ import ReactDOM from 'react-dom'
                 }
             }
         
+            if (children.com.component_name === 'sidebar') {
+                return (ctx) => {
+                    require.ensure([], (require) => {
+                        ctx.state.com = require('/Users/a2014/Desktop/project/scripts/components/js/sidebar/index')
+                        ctx.setState({})
+                    }, 'sidebar')
+                }
+            }
+        
+            if (children.com.component_name === 'datePicker') {
+                return (ctx) => {
+                    require.ensure([], (require) => {
+                        ctx.state.com = require('/Users/a2014/Desktop/project/scripts/components/js/datePicker/index')
+                        ctx.setState({})
+                    }, 'datePicker')
+                }
+            }
+        
+            if (children.com.component_name === 'searchInput') {
+                return (ctx) => {
+                    require.ensure([], (require) => {
+                        ctx.state.com = require('/Users/a2014/Desktop/project/scripts/components/js/searchInput/index')
+                        ctx.setState({})
+                    }, 'searchInput')
+                }
+            }
+        
             if (children.com.component_name === 'layout') {
                 return (ctx) => {
                     require.ensure([], (require) => {
@@ -113,8 +140,8 @@ import ReactDOM from 'react-dom'
                     {
                         false ? 
                         (<div className="btn-nav">
-                            <img src="/edit.png" className="btn-oper" onClick={this.edit}/>
-                            <img src="/close.png" className="btn-oper" onClick={this.close}/>
+                            <img src="/img/edit.png" className="btn-oper" onClick={this.edit}/>
+                            <img src="/img/close.png" className="btn-oper" onClick={this.close}/>
                         </div>) : null
                     }
                     { this.state.com ? React.createElement(this.state.com, this.props) : null }     

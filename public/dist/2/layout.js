@@ -1,4 +1,4 @@
-webpackJsonp([5],{
+webpackJsonp([6],{
 
 /***/ 37:
 /***/ (function(module, exports, __webpack_require__) {
@@ -17,7 +17,7 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(522);
+__webpack_require__(526);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,16 +55,12 @@ var Layout = function (_React$Component) {
             var iframe = document.getElementById('iframe');
             var wrapper = document.getElementsByClassName('layout-iframe')[0];
             iframe.width = wrapper.offsetWidth;
-            var bHeight = iframe.contentWindow.document.body.scrollHeight;
-            var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
-            console.log(bHeight, dHeight);
         }
     }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
 
-            console.log(this.config.content.value);
             return _react2.default.createElement(
                 'div',
                 { className: 'layout-wrapper' },
@@ -107,54 +103,7 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 522:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(523);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// Prepare cssTransformation
-var transform;
-
-var options = {"hmr":true}
-options.transform = transform
-// add the styles to the DOM
-var update = __webpack_require__(525)(content, options);
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/less-loader/dist/cjs.js!./layout.less", function() {
-			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/less-loader/dist/cjs.js!./layout.less");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
 /***/ 523:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(524)(false);
-// imports
-
-
-// module
-exports.push([module.i, ".layout-wrapper {\n  overflow: hidden;\n}\n.layout-side {\n  float: left;\n  width: 100px;\n  margin-bottom: -9999px;\n  padding-bottom: 9999px;\n  border: 1px solid #eee;\n}\n.layout-iframe {\n  float: left;\n  min-height: 200px;\n}\n.layout-item {\n  display: block;\n  width: 100%;\n  box-sizing: border-box;\n  text-align: center;\n  padding: 10px;\n  background-color: #eee;\n  cursor: pointer;\n}\n.layout-select {\n  background-color: #ccc;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 524:
 /***/ (function(module, exports) {
 
 /*
@@ -237,7 +186,7 @@ function toComment(sourceMap) {
 
 /***/ }),
 
-/***/ 525:
+/***/ 524:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -293,7 +242,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(526);
+var	fixUrls = __webpack_require__(525);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -610,7 +559,7 @@ function updateLink (link, options, obj) {
 
 /***/ }),
 
-/***/ 526:
+/***/ 525:
 /***/ (function(module, exports) {
 
 
@@ -702,6 +651,53 @@ module.exports = function (css) {
 	// send back the fixed css
 	return fixedCss;
 };
+
+
+/***/ }),
+
+/***/ 526:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(527);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {"hmr":true}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(524)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/less-loader/dist/cjs.js!./layout.less", function() {
+			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/less-loader/dist/cjs.js!./layout.less");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ 527:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(523)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".layout-wrapper {\n  overflow: hidden;\n}\n.layout-side {\n  float: left;\n  width: 100px;\n  margin-bottom: -9999px;\n  padding-bottom: 9999px;\n  border: 1px solid #eee;\n}\n.layout-iframe {\n  float: left;\n  min-height: 200px;\n}\n.layout-item {\n  display: block;\n  width: 100%;\n  box-sizing: border-box;\n  text-align: center;\n  padding: 10px;\n  background-color: #eee;\n  cursor: pointer;\n}\n.layout-select {\n  background-color: #ccc;\n}\n", ""]);
+
+// exports
 
 
 /***/ })

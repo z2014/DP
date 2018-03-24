@@ -78,12 +78,12 @@
                 }
             }
         
-            if (children.com.component_name === 'layout') {
+            if (children.com.component_name === 'sidebar') {
                 return (ctx) => {
                     require.ensure([], (require) => {
-                        ctx.state.com = require('/Users/a2014/Desktop/project/scripts/components/js/layout/index')
+                        ctx.state.com = require('/Users/a2014/Desktop/project/scripts/components/js/sidebar/index')
                         ctx.setState({})
-                    }, 'layout')
+                    }, 'sidebar')
                 }
             }
         
@@ -102,6 +102,15 @@
                         ctx.state.com = require('/Users/a2014/Desktop/project/scripts/components/js/searchInput/index')
                         ctx.setState({})
                     }, 'searchInput')
+                }
+            }
+        
+            if (children.com.component_name === 'layout') {
+                return (ctx) => {
+                    require.ensure([], (require) => {
+                        ctx.state.com = require('/Users/a2014/Desktop/project/scripts/components/js/layout/index')
+                        ctx.setState({})
+                    }, 'layout')
                 }
             }
         
@@ -128,8 +137,8 @@
                     {
                         true ? 
                         (<div className="btn-nav">
-                            <img src="/img/edit.png" className="btn-oper" onClick={this.edit}/>
-                            <img src="/img/close.png" className="btn-oper" onClick={this.close}/>
+                            <i className="icon icon-edit btn-oper" onClick={this.edit} />
+                            <i className="icon icon-close btn-oper" onClick={this.close} />
                         </div>) : null
                     }
                     { this.state.com ? React.createElement(this.state.com, this.props) : null }     

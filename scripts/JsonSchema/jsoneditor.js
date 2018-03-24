@@ -13,7 +13,7 @@ export default class JsonEditor extends React.Component{
             }
         }
         var editor = new JSONEditor(container, options)
-        editor.set(this.props.value ? this.props.value : {'性能监控': '//www.baidu.com'})
+        editor.set(this.props.value ? this.props.value : {'key': 'value'})
     }
     render() {
         return (

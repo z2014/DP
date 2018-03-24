@@ -56,8 +56,8 @@ function generate(config, bool) {
                     {
                         ${bool} ? 
                         (<div className="btn-nav">
-                            <img src="/img/edit.png" className="btn-oper" onClick={this.edit}/>
-                            <img src="/img/close.png" className="btn-oper" onClick={this.close}/>
+                            <i className="icon icon-edit btn-oper" onClick={this.edit} />
+                            <i className="icon icon-close btn-oper" onClick={this.close} />
                         </div>) : null
                     }
                     { this.state.com ? React.createElement(this.state.com, this.props) : null }     

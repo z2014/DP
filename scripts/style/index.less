@@ -74,6 +74,7 @@
     position: relative;
 }
 .btn-nav {
+    z-index: 5;
 	position: absolute;
 	top: 0px;
 	right: 0px;
@@ -105,7 +106,8 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(0,0,0,0.5)
+    background-color: rgba(0,0,0,0.5);
+    z-index: 10;
 }
 .modal{
 	position: fixed;
@@ -190,4 +192,10 @@
 }
 .icon-up{
     background-image: url('/img/up.png');
+}
+.icon-edit{
+    background-image: url('/img/edit.png')
+}
+.icon-close{
+    background-image: url('/img/close.png')
 }

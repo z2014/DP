@@ -1,4 +1,4 @@
-webpackJsonp([9],{
+webpackJsonp([10],{
 
 /***/ 15:
 /***/ (function(module, exports, __webpack_require__) {
@@ -64,7 +64,7 @@ var Component = function (_React$Component) {
 
             if (children.com.component_name === 'text') {
                 return function (ctx) {
-                    __webpack_require__.e/* require.ensure */(6).then((function (require) {
+                    __webpack_require__.e/* require.ensure */(7).then((function (require) {
                         ctx.state.com = __webpack_require__(30);
                         ctx.setState({});
                     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
@@ -118,7 +118,7 @@ var Component = function (_React$Component) {
 
             if (children.com.component_name === 'link') {
                 return function (ctx) {
-                    __webpack_require__.e/* require.ensure */(7).then((function (require) {
+                    __webpack_require__.e/* require.ensure */(8).then((function (require) {
                         ctx.state.com = __webpack_require__(36);
                         ctx.setState({});
                     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
@@ -127,7 +127,7 @@ var Component = function (_React$Component) {
 
             if (children.com.component_name === 'layout') {
                 return function (ctx) {
-                    __webpack_require__.e/* require.ensure */(5).then((function (require) {
+                    __webpack_require__.e/* require.ensure */(6).then((function (require) {
                         ctx.state.com = __webpack_require__(37);
                         ctx.setState({});
                     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
@@ -136,8 +136,17 @@ var Component = function (_React$Component) {
 
             if (children.com.component_name === 'datePicker') {
                 return function (ctx) {
-                    __webpack_require__.e/* require.ensure */(8).then((function (require) {
+                    __webpack_require__.e/* require.ensure */(9).then((function (require) {
                         ctx.state.com = __webpack_require__(38);
+                        ctx.setState({});
+                    }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+                };
+            }
+
+            if (children.com.component_name === 'searchInput') {
+                return function (ctx) {
+                    __webpack_require__.e/* require.ensure */(5).then((function (require) {
+                        ctx.state.com = __webpack_require__(39);
                         ctx.setState({});
                     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
                 };
@@ -170,8 +179,8 @@ var Component = function (_React$Component) {
                 false ? _react2.default.createElement(
                     'div',
                     { className: 'btn-nav' },
-                    _react2.default.createElement('img', { src: '/edit.png', className: 'btn-oper', onClick: this.edit }),
-                    _react2.default.createElement('img', { src: '/close.png', className: 'btn-oper', onClick: this.close })
+                    _react2.default.createElement('img', { src: '/img/edit.png', className: 'btn-oper', onClick: this.edit }),
+                    _react2.default.createElement('img', { src: '/img/close.png', className: 'btn-oper', onClick: this.close })
                 ) : null,
                 this.state.com ? _react2.default.createElement(this.state.com, this.props) : null
             );
@@ -184,7 +193,7 @@ var Component = function (_React$Component) {
 exports.default = Component;
 
 
-var components = '[{"com":{"component_name":"text","component_path":"components/js/text/index","component_desc":"文本","component_meta":{"label":{"name":"文本组件","type":"string"},"content":{"name":"文本内容","type":"string","value":"流量页面"},"style":{"name":"样式","type":"radio","def":"style","options":{"center":"居中","left":"居左","right":"居右"}}},"component_id":0}},{"com":{"component_name":"lineChart","component_path":"components/js/line/index","component_desc":"折线图","component_meta":{"url":{"name":"获取数据","type":"string","value":"https://www.easy-mock.com/mock/5aadcefad923ab62b0bb4f4b/project/line"},"content":{"name":"文本内容","type":"string"}},"component_type":"chart","component_id":1}}]';
+var components = '[{"com":{"component_name":"text","component_path":"components/js/text/index","component_desc":"文本","component_meta":{"label":{"name":"文本组件","type":"string"},"content":{"name":"文本内容","type":"string","value":"流量页面"},"style":{"name":"样式","type":"radio","def":"style","options":{"center":"居中","left":"居左","right":"居右"}}},"component_id":0}},{"com":{"component_name":"lineChart","component_path":"components/js/line/index","component_desc":"折线图","component_meta":{"url":{"name":"获取数据","type":"string","value":"https://www.easy-mock.com/mock/5aadcefad923ab62b0bb4f4b/project/line"},"content":{"name":"文本内容","type":"string"}},"component_type":"chart","component_id":1}},{"com":{"component_name":"text","component_path":"components/js/text/index","component_desc":"文本","component_meta":{"label":{"name":"文本组件","type":"string"},"content":{"name":"文本内容","type":"string","value":"将顶焦度计"},"style":{"name":"样式","type":"radio","def":"style","options":{"center":"居中","left":"居左","right":"居右"},"value":"center"}},"component_type":"chart","component_id":2}}]';
 
 var App = function (_React$Component2) {
     _inherits(App, _React$Component2);

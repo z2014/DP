@@ -5,7 +5,7 @@ module.exports = {
         type: 'string'
     },
     content: {
-        name: '路由信息',
+        name: '定义布局',
         type: 'jsoneditor'
     },
 

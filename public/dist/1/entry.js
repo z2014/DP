@@ -1,4 +1,4 @@
-webpackJsonp([8],{
+webpackJsonp([11],{
 
 /***/ 15:
 /***/ (function(module, exports, __webpack_require__) {
@@ -64,7 +64,7 @@ var Component = function (_React$Component) {
 
             if (children.com.component_name === 'text') {
                 return function (ctx) {
-                    __webpack_require__.e/* require.ensure */(6).then((function (require) {
+                    __webpack_require__.e/* require.ensure */(7).then((function (require) {
                         ctx.state.com = __webpack_require__(30);
                         ctx.setState({});
                     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
@@ -91,7 +91,7 @@ var Component = function (_React$Component) {
 
             if (children.com.component_name === 'lineChart') {
                 return function (ctx) {
-                    __webpack_require__.e/* require.ensure */(2).then((function (require) {
+                    __webpack_require__.e/* require.ensure */(1).then((function (require) {
                         ctx.state.com = __webpack_require__(33);
                         ctx.setState({});
                     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
@@ -100,7 +100,7 @@ var Component = function (_React$Component) {
 
             if (children.com.component_name === 'mapChart') {
                 return function (ctx) {
-                    __webpack_require__.e/* require.ensure */(1).then((function (require) {
+                    __webpack_require__.e/* require.ensure */(3).then((function (require) {
                         ctx.state.com = __webpack_require__(34);
                         ctx.setState({});
                     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
@@ -109,7 +109,7 @@ var Component = function (_React$Component) {
 
             if (children.com.component_name === 'funnelChart') {
                 return function (ctx) {
-                    __webpack_require__.e/* require.ensure */(3).then((function (require) {
+                    __webpack_require__.e/* require.ensure */(2).then((function (require) {
                         ctx.state.com = __webpack_require__(35);
                         ctx.setState({});
                     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
@@ -118,8 +118,35 @@ var Component = function (_React$Component) {
 
             if (children.com.component_name === 'link') {
                 return function (ctx) {
-                    __webpack_require__.e/* require.ensure */(7).then((function (require) {
+                    __webpack_require__.e/* require.ensure */(8).then((function (require) {
                         ctx.state.com = __webpack_require__(36);
+                        ctx.setState({});
+                    }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+                };
+            }
+
+            if (children.com.component_name === 'sidebar') {
+                return function (ctx) {
+                    __webpack_require__.e/* require.ensure */(5).then((function (require) {
+                        ctx.state.com = __webpack_require__(37);
+                        ctx.setState({});
+                    }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+                };
+            }
+
+            if (children.com.component_name === 'datePicker') {
+                return function (ctx) {
+                    __webpack_require__.e/* require.ensure */(10).then((function (require) {
+                        ctx.state.com = __webpack_require__(38);
+                        ctx.setState({});
+                    }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+                };
+            }
+
+            if (children.com.component_name === 'searchInput') {
+                return function (ctx) {
+                    __webpack_require__.e/* require.ensure */(6).then((function (require) {
+                        ctx.state.com = __webpack_require__(39);
                         ctx.setState({});
                     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
                 };
@@ -127,8 +154,8 @@ var Component = function (_React$Component) {
 
             if (children.com.component_name === 'layout') {
                 return function (ctx) {
-                    __webpack_require__.e/* require.ensure */(5).then((function (require) {
-                        ctx.state.com = __webpack_require__(37);
+                    __webpack_require__.e/* require.ensure */(9).then((function (require) {
+                        ctx.state.com = __webpack_require__(40);
                         ctx.setState({});
                     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
                 };
@@ -161,8 +188,8 @@ var Component = function (_React$Component) {
                 false ? _react2.default.createElement(
                     'div',
                     { className: 'btn-nav' },
-                    _react2.default.createElement('img', { src: '/edit.png', className: 'btn-oper', onClick: this.edit }),
-                    _react2.default.createElement('img', { src: '/close.png', className: 'btn-oper', onClick: this.close })
+                    _react2.default.createElement('img', { src: '/img/edit.png', className: 'btn-oper', onClick: this.edit }),
+                    _react2.default.createElement('img', { src: '/img/close.png', className: 'btn-oper', onClick: this.close })
                 ) : null,
                 this.state.com ? _react2.default.createElement(this.state.com, this.props) : null
             );

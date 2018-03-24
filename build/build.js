@@ -11,7 +11,6 @@ module.exports = function build(pageId, coms) {
     const component = generate(config, false)
     const jsPath = path.join(__dirname + '/../public/dist')
     const template = path.join(__dirname + '/../scripts/src/build.js')
-    console.log('aa',coms)
     ejs.renderFile(template, {
         component: component,
         components: `'${JSON.stringify(coms)}'`
