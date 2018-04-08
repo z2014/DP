@@ -17,7 +17,7 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(717);
+__webpack_require__(720);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -54,7 +54,7 @@ var Sidebar = function (_React$Component) {
         value: function componentDidMount() {
             try {
                 var iframe = document.getElementById('iframe');
-                var wrapper = document.getElementsByClassName('layout-iframe')[0];
+                var wrapper = document.getElementsByClassName('sidebar-iframe')[0];
                 iframe.width = wrapper.offsetWidth;
             } catch (err) {
                 console.warn(err);
@@ -93,7 +93,7 @@ var Sidebar = function (_React$Component) {
                 _react2.default.createElement(
                     'div',
                     { className: 'sidebar-iframe' },
-                    this.state.url !== '' ? _react2.default.createElement('iframe', { src: this.config.content.value[this.state.url], id: 'iframe', ref: 'iframe', width: '600px', height: '800px', frameBorder: '0' }) : null
+                    this.state.url !== '' ? _react2.default.createElement('iframe', { src: this.config.content.value[this.state.url], id: 'iframe', ref: 'iframe', width: '1000px', height: '800px', frameBorder: '0' }) : null
                 )
             );
         }
@@ -107,7 +107,7 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 700:
+/***/ 396:
 /***/ (function(module, exports) {
 
 /*
@@ -190,7 +190,7 @@ function toComment(sourceMap) {
 
 /***/ }),
 
-/***/ 701:
+/***/ 397:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -246,7 +246,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(702);
+var	fixUrls = __webpack_require__(398);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -563,7 +563,7 @@ function updateLink (link, options, obj) {
 
 /***/ }),
 
-/***/ 702:
+/***/ 398:
 /***/ (function(module, exports) {
 
 
@@ -659,13 +659,13 @@ module.exports = function (css) {
 
 /***/ }),
 
-/***/ 717:
+/***/ 720:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(718);
+var content = __webpack_require__(721);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -673,7 +673,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(701)(content, options);
+var update = __webpack_require__(397)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -691,10 +691,10 @@ if(false) {
 
 /***/ }),
 
-/***/ 718:
+/***/ 721:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(700)(false);
+exports = module.exports = __webpack_require__(396)(false);
 // imports
 
 

@@ -34,7 +34,7 @@
 /******/
 /******/ 	// objects to store loaded and loading chunks
 /******/ 	var installedChunks = {
-/******/ 		12: 0
+/******/ 		13: 0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -91,7 +91,7 @@
 /******/ 		if (__webpack_require__.nc) {
 /******/ 			script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 		}
-/******/ 		script.src = __webpack_require__.p + "" + ({"0":"pieChart","1":"lineChart","2":"funnelChart","3":"mapChart","4":"barChart","5":"sidebar","6":"searchInput","7":"text","8":"link","9":"datePicker","10":"layout","11":"entry"}[chunkId]||chunkId) + ".js";
+/******/ 		script.src = __webpack_require__.p + "" + ({"0":"pieChart","1":"lineChart","2":"funnelChart","3":"mapChart","4":"barChart","5":"sidebar","6":"searchInput","7":"text","8":"link","9":"datePicker","10":"button","11":"layout","12":"entry"}[chunkId]||chunkId) + ".js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {

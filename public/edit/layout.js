@@ -1,6 +1,6 @@
-webpackJsonp([9],{
+webpackJsonp([7],{
 
-/***/ 109:
+/***/ 112:
 /***/ (function(module, exports) {
 
 
@@ -96,7 +96,7 @@ module.exports = function (css) {
 
 /***/ }),
 
-/***/ 308:
+/***/ 309:
 /***/ (function(module, exports) {
 
 /*
@@ -179,7 +179,7 @@ function toComment(sourceMap) {
 
 /***/ }),
 
-/***/ 309:
+/***/ 310:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -235,7 +235,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(109);
+var	fixUrls = __webpack_require__(112);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -552,7 +552,7 @@ function updateLink (link, options, obj) {
 
 /***/ }),
 
-/***/ 320:
+/***/ 321:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -573,19 +573,19 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(802);
+__webpack_require__(807);
 
-var _reactDnd = __webpack_require__(36);
+var _reactDnd = __webpack_require__(31);
 
-var _component = __webpack_require__(202);
+var _component = __webpack_require__(97);
 
 var _component2 = _interopRequireDefault(_component);
 
-var _index = __webpack_require__(203);
+var _index = __webpack_require__(98);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _modal = __webpack_require__(264);
+var _modal = __webpack_require__(99);
 
 var _modal2 = _interopRequireDefault(_modal);
 
@@ -620,7 +620,7 @@ var Layout = function (_React$Component) {
                 this.config.content.value ? Object.keys(this.config.content.value).map(function (key, index) {
                     var style = { flex: '' + _this2.config.content.value[key] };
                     return _react2.default.createElement(LayoutItem, _extends({ style: style, key: index }, _this2.props, { index: index }));
-                }) : null
+                }) : _react2.default.createElement(LayoutItem, _extends({ style: { flex: 1 }, key: 0 }, this.props, { index: 0 }))
             );
         }
     }]);
@@ -746,13 +746,13 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 802:
+/***/ 807:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(803);
+var content = __webpack_require__(808);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -760,7 +760,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(309)(content, options);
+var update = __webpack_require__(310)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -778,15 +778,15 @@ if(false) {
 
 /***/ }),
 
-/***/ 803:
+/***/ 808:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(308)(false);
+exports = module.exports = __webpack_require__(309)(false);
 // imports
 
 
 // module
-exports.push([module.i, ".layout-wrapper {\n  display: flex;\n}\n.layout-item {\n  border: 1px solid #eee;\n  min-height: 100px;\n}\n", ""]);
+exports.push([module.i, "* {\n  margin: 0;\n  padding: 0;\n}\n.layout-wrapper {\n  display: flex;\n}\n.layout-item {\n  min-height: 100px;\n}\n.basic-component {\n  min-height: 50px;\n  position: relative;\n  overflow: hidden;\n}\n", ""]);
 
 // exports
 

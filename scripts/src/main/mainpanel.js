@@ -81,7 +81,7 @@ export default class MainPanel extends React.Component {
     render () {
         const { connectDropTarget } = this.props
         let coms = this.props.store.config.map((com, index) => {
-            return <Component com={com} key={index} renderModal={this.renderModal} removeComponent={this.removeComponent} store={this.props.store}/>
+            return <Component com={com} key={com.com.component_id} renderModal={this.renderModal} removeComponent={this.removeComponent} store={this.props.store}/>
         })
         return connectDropTarget(
             <div className='mainpanel'>

@@ -10,7 +10,6 @@ export default class Nav extends React.Component {
     }
     build = () => {
         const config = this.props.store.config.slice()
-        console.log(config)
         buildJs(window.info, config)
     }
     save = () => {
@@ -28,7 +27,7 @@ export default class Nav extends React.Component {
                 <div className="nav-wrapper">
                     <span className="preview-btn" onClick={this.save}>保存</span>
                     <span className="preview-btn" onClick={this.build}
-                    >生成</span>
+                    >打包</span>
                     <span  onClick={this.preview}
                         className="preview-btn"
                     >预览</span>

@@ -1,4 +1,4 @@
-webpackJsonp([10],{
+webpackJsonp([11],{
 
 /***/ 214:
 /***/ (function(module, exports, __webpack_require__) {
@@ -21,19 +21,19 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(721);
+__webpack_require__(724);
 
 var _reactDnd = __webpack_require__(74);
 
-var _component = __webpack_require__(723);
+var _component = __webpack_require__(726);
 
 var _component2 = _interopRequireDefault(_component);
 
-var _index = __webpack_require__(724);
+var _index = __webpack_require__(727);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _modal = __webpack_require__(785);
+var _modal = __webpack_require__(788);
 
 var _modal2 = _interopRequireDefault(_modal);
 
@@ -86,8 +86,8 @@ var ItemTypes = {
 var squareTarget = {
     drop: function drop(props, monitor, component) {
         var item = monitor.getItem();
+        item.com.component_id = Symbol(item.component_name);
         props.store.addChildElement(item, props.index, props.com.com.component_id);
-        // item.com.component_id = component.props.store.config.slice().length
         // component.handleDrop(item)
         // props.store.addConfig(item)
     }
@@ -110,6 +110,11 @@ var LayoutItem = (_dec = (0, _reactDnd.DropTarget)(ItemTypes.DRAGDIV, squareTarg
 
         var _this3 = _possibleConstructorReturn(this, (LayoutItem.__proto__ || Object.getPrototypeOf(LayoutItem)).call(this, props));
 
+        _this3.removeComponent = function (config) {
+            _this3.props.store.deleteChildElement(config, _this3.props.index, _this3.props.com.com.component_id);
+            _this3.setState({});
+        };
+
         _this3.renderModal = function (config) {
             var self = _this3;
             var meta = (0, _index2.default)({ config: config, setMetaVal: self.setMetaVal });
@@ -120,7 +125,6 @@ var LayoutItem = (_dec = (0, _reactDnd.DropTarget)(ItemTypes.DRAGDIV, squareTarg
         };
 
         _this3.confirm = function () {
-            console.log(_this3.state.metaVal);
             _this3.props.store.updateChildConfig(_this3.props.com.com.component_id, _this3.props.index, _this3.state.metaVal);
             _this3.setState({
                 isshow: false
@@ -158,8 +162,8 @@ var LayoutItem = (_dec = (0, _reactDnd.DropTarget)(ItemTypes.DRAGDIV, squareTarg
             return connectDropTarget(_react2.default.createElement(
                 'div',
                 { style: this.props.style, className: 'layout-item' },
-                this.props.com.com.component_child[this.props.index] ? this.props.com.com.component_child[this.props.index].map(function (child, index) {
-                    return _react2.default.createElement(_component2.default, { com: child, key: index, renderModal: _this4.renderModal, store: _this4.props.store });
+                this.props.com.com.component_child && this.props.com.com.component_child[this.props.index] ? this.props.com.com.component_child[this.props.index].map(function (child, index) {
+                    return _react2.default.createElement(_component2.default, { com: child, key: index, removeComponent: _this4.removeComponent, renderModal: _this4.renderModal, store: _this4.props.store });
                 }) : null,
                 this.state.isshow ? _react2.default.createElement(
                     _modal2.default,
@@ -190,13 +194,565 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 695:
+/***/ 396:
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
+
+/***/ 397:
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+
+var stylesInDom = {};
+
+var	memoize = function (fn) {
+	var memo;
+
+	return function () {
+		if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+		return memo;
+	};
+};
+
+var isOldIE = memoize(function () {
+	// Test for IE <= 9 as proposed by Browserhacks
+	// @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
+	// Tests for existence of standard globals is to allow style-loader
+	// to operate correctly into non-standard environments
+	// @see https://github.com/webpack-contrib/style-loader/issues/177
+	return window && document && document.all && !window.atob;
+});
+
+var getElement = (function (fn) {
+	var memo = {};
+
+	return function(selector) {
+		if (typeof memo[selector] === "undefined") {
+			var styleTarget = fn.call(this, selector);
+			// Special case to return head of iframe instead of iframe itself
+			if (styleTarget instanceof window.HTMLIFrameElement) {
+				try {
+					// This will throw an exception if access to iframe is blocked
+					// due to cross-origin restrictions
+					styleTarget = styleTarget.contentDocument.head;
+				} catch(e) {
+					styleTarget = null;
+				}
+			}
+			memo[selector] = styleTarget;
+		}
+		return memo[selector]
+	};
+})(function (target) {
+	return document.querySelector(target)
+});
+
+var singleton = null;
+var	singletonCounter = 0;
+var	stylesInsertedAtTop = [];
+
+var	fixUrls = __webpack_require__(398);
+
+module.exports = function(list, options) {
+	if (typeof DEBUG !== "undefined" && DEBUG) {
+		if (typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+	}
+
+	options = options || {};
+
+	options.attrs = typeof options.attrs === "object" ? options.attrs : {};
+
+	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+	// tags it will allow on a page
+	if (!options.singleton && typeof options.singleton !== "boolean") options.singleton = isOldIE();
+
+	// By default, add <style> tags to the <head> element
+	if (!options.insertInto) options.insertInto = "head";
+
+	// By default, add <style> tags to the bottom of the target
+	if (!options.insertAt) options.insertAt = "bottom";
+
+	var styles = listToStyles(list, options);
+
+	addStylesToDom(styles, options);
+
+	return function update (newList) {
+		var mayRemove = [];
+
+		for (var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+
+			domStyle.refs--;
+			mayRemove.push(domStyle);
+		}
+
+		if(newList) {
+			var newStyles = listToStyles(newList, options);
+			addStylesToDom(newStyles, options);
+		}
+
+		for (var i = 0; i < mayRemove.length; i++) {
+			var domStyle = mayRemove[i];
+
+			if(domStyle.refs === 0) {
+				for (var j = 0; j < domStyle.parts.length; j++) domStyle.parts[j]();
+
+				delete stylesInDom[domStyle.id];
+			}
+		}
+	};
+};
+
+function addStylesToDom (styles, options) {
+	for (var i = 0; i < styles.length; i++) {
+		var item = styles[i];
+		var domStyle = stylesInDom[item.id];
+
+		if(domStyle) {
+			domStyle.refs++;
+
+			for(var j = 0; j < domStyle.parts.length; j++) {
+				domStyle.parts[j](item.parts[j]);
+			}
+
+			for(; j < item.parts.length; j++) {
+				domStyle.parts.push(addStyle(item.parts[j], options));
+			}
+		} else {
+			var parts = [];
+
+			for(var j = 0; j < item.parts.length; j++) {
+				parts.push(addStyle(item.parts[j], options));
+			}
+
+			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+		}
+	}
+}
+
+function listToStyles (list, options) {
+	var styles = [];
+	var newStyles = {};
+
+	for (var i = 0; i < list.length; i++) {
+		var item = list[i];
+		var id = options.base ? item[0] + options.base : item[0];
+		var css = item[1];
+		var media = item[2];
+		var sourceMap = item[3];
+		var part = {css: css, media: media, sourceMap: sourceMap};
+
+		if(!newStyles[id]) styles.push(newStyles[id] = {id: id, parts: [part]});
+		else newStyles[id].parts.push(part);
+	}
+
+	return styles;
+}
+
+function insertStyleElement (options, style) {
+	var target = getElement(options.insertInto)
+
+	if (!target) {
+		throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
+	}
+
+	var lastStyleElementInsertedAtTop = stylesInsertedAtTop[stylesInsertedAtTop.length - 1];
+
+	if (options.insertAt === "top") {
+		if (!lastStyleElementInsertedAtTop) {
+			target.insertBefore(style, target.firstChild);
+		} else if (lastStyleElementInsertedAtTop.nextSibling) {
+			target.insertBefore(style, lastStyleElementInsertedAtTop.nextSibling);
+		} else {
+			target.appendChild(style);
+		}
+		stylesInsertedAtTop.push(style);
+	} else if (options.insertAt === "bottom") {
+		target.appendChild(style);
+	} else if (typeof options.insertAt === "object" && options.insertAt.before) {
+		var nextSibling = getElement(options.insertInto + " " + options.insertAt.before);
+		target.insertBefore(style, nextSibling);
+	} else {
+		throw new Error("[Style Loader]\n\n Invalid value for parameter 'insertAt' ('options.insertAt') found.\n Must be 'top', 'bottom', or Object.\n (https://github.com/webpack-contrib/style-loader#insertat)\n");
+	}
+}
+
+function removeStyleElement (style) {
+	if (style.parentNode === null) return false;
+	style.parentNode.removeChild(style);
+
+	var idx = stylesInsertedAtTop.indexOf(style);
+	if(idx >= 0) {
+		stylesInsertedAtTop.splice(idx, 1);
+	}
+}
+
+function createStyleElement (options) {
+	var style = document.createElement("style");
+
+	options.attrs.type = "text/css";
+
+	addAttrs(style, options.attrs);
+	insertStyleElement(options, style);
+
+	return style;
+}
+
+function createLinkElement (options) {
+	var link = document.createElement("link");
+
+	options.attrs.type = "text/css";
+	options.attrs.rel = "stylesheet";
+
+	addAttrs(link, options.attrs);
+	insertStyleElement(options, link);
+
+	return link;
+}
+
+function addAttrs (el, attrs) {
+	Object.keys(attrs).forEach(function (key) {
+		el.setAttribute(key, attrs[key]);
+	});
+}
+
+function addStyle (obj, options) {
+	var style, update, remove, result;
+
+	// If a transform function was defined, run it on the css
+	if (options.transform && obj.css) {
+	    result = options.transform(obj.css);
+
+	    if (result) {
+	    	// If transform returns a value, use that instead of the original css.
+	    	// This allows running runtime transformations on the css.
+	    	obj.css = result;
+	    } else {
+	    	// If the transform function returns a falsy value, don't add this css.
+	    	// This allows conditional loading of css
+	    	return function() {
+	    		// noop
+	    	};
+	    }
+	}
+
+	if (options.singleton) {
+		var styleIndex = singletonCounter++;
+
+		style = singleton || (singleton = createStyleElement(options));
+
+		update = applyToSingletonTag.bind(null, style, styleIndex, false);
+		remove = applyToSingletonTag.bind(null, style, styleIndex, true);
+
+	} else if (
+		obj.sourceMap &&
+		typeof URL === "function" &&
+		typeof URL.createObjectURL === "function" &&
+		typeof URL.revokeObjectURL === "function" &&
+		typeof Blob === "function" &&
+		typeof btoa === "function"
+	) {
+		style = createLinkElement(options);
+		update = updateLink.bind(null, style, options);
+		remove = function () {
+			removeStyleElement(style);
+
+			if(style.href) URL.revokeObjectURL(style.href);
+		};
+	} else {
+		style = createStyleElement(options);
+		update = applyToTag.bind(null, style);
+		remove = function () {
+			removeStyleElement(style);
+		};
+	}
+
+	update(obj);
+
+	return function updateStyle (newObj) {
+		if (newObj) {
+			if (
+				newObj.css === obj.css &&
+				newObj.media === obj.media &&
+				newObj.sourceMap === obj.sourceMap
+			) {
+				return;
+			}
+
+			update(obj = newObj);
+		} else {
+			remove();
+		}
+	};
+}
+
+var replaceText = (function () {
+	var textStore = [];
+
+	return function (index, replacement) {
+		textStore[index] = replacement;
+
+		return textStore.filter(Boolean).join('\n');
+	};
+})();
+
+function applyToSingletonTag (style, index, remove, obj) {
+	var css = remove ? "" : obj.css;
+
+	if (style.styleSheet) {
+		style.styleSheet.cssText = replaceText(index, css);
+	} else {
+		var cssNode = document.createTextNode(css);
+		var childNodes = style.childNodes;
+
+		if (childNodes[index]) style.removeChild(childNodes[index]);
+
+		if (childNodes.length) {
+			style.insertBefore(cssNode, childNodes[index]);
+		} else {
+			style.appendChild(cssNode);
+		}
+	}
+}
+
+function applyToTag (style, obj) {
+	var css = obj.css;
+	var media = obj.media;
+
+	if(media) {
+		style.setAttribute("media", media)
+	}
+
+	if(style.styleSheet) {
+		style.styleSheet.cssText = css;
+	} else {
+		while(style.firstChild) {
+			style.removeChild(style.firstChild);
+		}
+
+		style.appendChild(document.createTextNode(css));
+	}
+}
+
+function updateLink (link, options, obj) {
+	var css = obj.css;
+	var sourceMap = obj.sourceMap;
+
+	/*
+		If convertToAbsoluteUrls isn't defined, but sourcemaps are enabled
+		and there is no publicPath defined then lets turn convertToAbsoluteUrls
+		on by default.  Otherwise default to the convertToAbsoluteUrls option
+		directly
+	*/
+	var autoFixUrls = options.convertToAbsoluteUrls === undefined && sourceMap;
+
+	if (options.convertToAbsoluteUrls || autoFixUrls) {
+		css = fixUrls(css);
+	}
+
+	if (sourceMap) {
+		// http://stackoverflow.com/a/26603875
+		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+	}
+
+	var blob = new Blob([css], { type: "text/css" });
+
+	var oldSrc = link.href;
+
+	link.href = URL.createObjectURL(blob);
+
+	if(oldSrc) URL.revokeObjectURL(oldSrc);
+}
+
+
+/***/ }),
+
+/***/ 398:
+/***/ (function(module, exports) {
+
+
+/**
+ * When source maps are enabled, `style-loader` uses a link element with a data-uri to
+ * embed the css on the page. This breaks all relative urls because now they are relative to a
+ * bundle instead of the current page.
+ *
+ * One solution is to only use full urls, but that may be impossible.
+ *
+ * Instead, this function "fixes" the relative urls to be absolute according to the current page location.
+ *
+ * A rudimentary test suite is located at `test/fixUrls.js` and can be run via the `npm test` command.
+ *
+ */
+
+module.exports = function (css) {
+  // get current location
+  var location = typeof window !== "undefined" && window.location;
+
+  if (!location) {
+    throw new Error("fixUrls requires window.location");
+  }
+
+	// blank or null?
+	if (!css || typeof css !== "string") {
+	  return css;
+  }
+
+  var baseUrl = location.protocol + "//" + location.host;
+  var currentDir = baseUrl + location.pathname.replace(/\/[^\/]*$/, "/");
+
+	// convert each url(...)
+	/*
+	This regular expression is just a way to recursively match brackets within
+	a string.
+
+	 /url\s*\(  = Match on the word "url" with any whitespace after it and then a parens
+	   (  = Start a capturing group
+	     (?:  = Start a non-capturing group
+	         [^)(]  = Match anything that isn't a parentheses
+	         |  = OR
+	         \(  = Match a start parentheses
+	             (?:  = Start another non-capturing groups
+	                 [^)(]+  = Match anything that isn't a parentheses
+	                 |  = OR
+	                 \(  = Match a start parentheses
+	                     [^)(]*  = Match anything that isn't a parentheses
+	                 \)  = Match a end parentheses
+	             )  = End Group
+              *\) = Match anything and then a close parens
+          )  = Close non-capturing group
+          *  = Match anything
+       )  = Close capturing group
+	 \)  = Match a close parens
+
+	 /gi  = Get all matches, not the first.  Be case insensitive.
+	 */
+	var fixedCss = css.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi, function(fullMatch, origUrl) {
+		// strip quotes (if they exist)
+		var unquotedOrigUrl = origUrl
+			.trim()
+			.replace(/^"(.*)"$/, function(o, $1){ return $1; })
+			.replace(/^'(.*)'$/, function(o, $1){ return $1; });
+
+		// already a full url? no change
+		if (/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/)/i.test(unquotedOrigUrl)) {
+		  return fullMatch;
+		}
+
+		// convert the url to a full url
+		var newUrl;
+
+		if (unquotedOrigUrl.indexOf("//") === 0) {
+		  	//TODO: should we add protocol?
+			newUrl = unquotedOrigUrl;
+		} else if (unquotedOrigUrl.indexOf("/") === 0) {
+			// path should be relative to the base url
+			newUrl = baseUrl + unquotedOrigUrl; // already starts with '/'
+		} else {
+			// path should be relative to current directory
+			newUrl = currentDir + unquotedOrigUrl.replace(/^\.\//, ""); // Strip leading './'
+		}
+
+		// send back the fixed url(...)
+		return "url(" + JSON.stringify(newUrl) + ")";
+	});
+
+	// send back the fixed css
+	return fixedCss;
+};
+
+
+/***/ }),
+
+/***/ 699:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var jsonlint = __webpack_require__(771);
+var jsonlint = __webpack_require__(774);
 
 /**
  * Parse JSON using the parser built-in in the browser.
@@ -1119,7 +1675,7 @@ if (!Array.prototype.find) {
 
 /***/ }),
 
-/***/ 696:
+/***/ 700:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1134,8 +1690,8 @@ module.exports = {
   toHash: toHash,
   getProperty: getProperty,
   escapeQuotes: escapeQuotes,
-  equal: __webpack_require__(705),
-  ucs2length: __webpack_require__(738),
+  equal: __webpack_require__(708),
+  ucs2length: __webpack_require__(741),
   varOccurences: varOccurences,
   varReplace: varReplace,
   cleanUpCode: cleanUpCode,
@@ -1394,7 +1950,7 @@ function unescapeJsonPointer(str) {
 
 /***/ }),
 
-/***/ 697:
+/***/ 701:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1560,566 +2116,14 @@ module.exports = {
 
 /***/ }),
 
-/***/ 700:
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
-
-/***/ }),
-
-/***/ 701:
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-
-var stylesInDom = {};
-
-var	memoize = function (fn) {
-	var memo;
-
-	return function () {
-		if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-		return memo;
-	};
-};
-
-var isOldIE = memoize(function () {
-	// Test for IE <= 9 as proposed by Browserhacks
-	// @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
-	// Tests for existence of standard globals is to allow style-loader
-	// to operate correctly into non-standard environments
-	// @see https://github.com/webpack-contrib/style-loader/issues/177
-	return window && document && document.all && !window.atob;
-});
-
-var getElement = (function (fn) {
-	var memo = {};
-
-	return function(selector) {
-		if (typeof memo[selector] === "undefined") {
-			var styleTarget = fn.call(this, selector);
-			// Special case to return head of iframe instead of iframe itself
-			if (styleTarget instanceof window.HTMLIFrameElement) {
-				try {
-					// This will throw an exception if access to iframe is blocked
-					// due to cross-origin restrictions
-					styleTarget = styleTarget.contentDocument.head;
-				} catch(e) {
-					styleTarget = null;
-				}
-			}
-			memo[selector] = styleTarget;
-		}
-		return memo[selector]
-	};
-})(function (target) {
-	return document.querySelector(target)
-});
-
-var singleton = null;
-var	singletonCounter = 0;
-var	stylesInsertedAtTop = [];
-
-var	fixUrls = __webpack_require__(702);
-
-module.exports = function(list, options) {
-	if (typeof DEBUG !== "undefined" && DEBUG) {
-		if (typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-	}
-
-	options = options || {};
-
-	options.attrs = typeof options.attrs === "object" ? options.attrs : {};
-
-	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-	// tags it will allow on a page
-	if (!options.singleton && typeof options.singleton !== "boolean") options.singleton = isOldIE();
-
-	// By default, add <style> tags to the <head> element
-	if (!options.insertInto) options.insertInto = "head";
-
-	// By default, add <style> tags to the bottom of the target
-	if (!options.insertAt) options.insertAt = "bottom";
-
-	var styles = listToStyles(list, options);
-
-	addStylesToDom(styles, options);
-
-	return function update (newList) {
-		var mayRemove = [];
-
-		for (var i = 0; i < styles.length; i++) {
-			var item = styles[i];
-			var domStyle = stylesInDom[item.id];
-
-			domStyle.refs--;
-			mayRemove.push(domStyle);
-		}
-
-		if(newList) {
-			var newStyles = listToStyles(newList, options);
-			addStylesToDom(newStyles, options);
-		}
-
-		for (var i = 0; i < mayRemove.length; i++) {
-			var domStyle = mayRemove[i];
-
-			if(domStyle.refs === 0) {
-				for (var j = 0; j < domStyle.parts.length; j++) domStyle.parts[j]();
-
-				delete stylesInDom[domStyle.id];
-			}
-		}
-	};
-};
-
-function addStylesToDom (styles, options) {
-	for (var i = 0; i < styles.length; i++) {
-		var item = styles[i];
-		var domStyle = stylesInDom[item.id];
-
-		if(domStyle) {
-			domStyle.refs++;
-
-			for(var j = 0; j < domStyle.parts.length; j++) {
-				domStyle.parts[j](item.parts[j]);
-			}
-
-			for(; j < item.parts.length; j++) {
-				domStyle.parts.push(addStyle(item.parts[j], options));
-			}
-		} else {
-			var parts = [];
-
-			for(var j = 0; j < item.parts.length; j++) {
-				parts.push(addStyle(item.parts[j], options));
-			}
-
-			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
-		}
-	}
-}
-
-function listToStyles (list, options) {
-	var styles = [];
-	var newStyles = {};
-
-	for (var i = 0; i < list.length; i++) {
-		var item = list[i];
-		var id = options.base ? item[0] + options.base : item[0];
-		var css = item[1];
-		var media = item[2];
-		var sourceMap = item[3];
-		var part = {css: css, media: media, sourceMap: sourceMap};
-
-		if(!newStyles[id]) styles.push(newStyles[id] = {id: id, parts: [part]});
-		else newStyles[id].parts.push(part);
-	}
-
-	return styles;
-}
-
-function insertStyleElement (options, style) {
-	var target = getElement(options.insertInto)
-
-	if (!target) {
-		throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
-	}
-
-	var lastStyleElementInsertedAtTop = stylesInsertedAtTop[stylesInsertedAtTop.length - 1];
-
-	if (options.insertAt === "top") {
-		if (!lastStyleElementInsertedAtTop) {
-			target.insertBefore(style, target.firstChild);
-		} else if (lastStyleElementInsertedAtTop.nextSibling) {
-			target.insertBefore(style, lastStyleElementInsertedAtTop.nextSibling);
-		} else {
-			target.appendChild(style);
-		}
-		stylesInsertedAtTop.push(style);
-	} else if (options.insertAt === "bottom") {
-		target.appendChild(style);
-	} else if (typeof options.insertAt === "object" && options.insertAt.before) {
-		var nextSibling = getElement(options.insertInto + " " + options.insertAt.before);
-		target.insertBefore(style, nextSibling);
-	} else {
-		throw new Error("[Style Loader]\n\n Invalid value for parameter 'insertAt' ('options.insertAt') found.\n Must be 'top', 'bottom', or Object.\n (https://github.com/webpack-contrib/style-loader#insertat)\n");
-	}
-}
-
-function removeStyleElement (style) {
-	if (style.parentNode === null) return false;
-	style.parentNode.removeChild(style);
-
-	var idx = stylesInsertedAtTop.indexOf(style);
-	if(idx >= 0) {
-		stylesInsertedAtTop.splice(idx, 1);
-	}
-}
-
-function createStyleElement (options) {
-	var style = document.createElement("style");
-
-	options.attrs.type = "text/css";
-
-	addAttrs(style, options.attrs);
-	insertStyleElement(options, style);
-
-	return style;
-}
-
-function createLinkElement (options) {
-	var link = document.createElement("link");
-
-	options.attrs.type = "text/css";
-	options.attrs.rel = "stylesheet";
-
-	addAttrs(link, options.attrs);
-	insertStyleElement(options, link);
-
-	return link;
-}
-
-function addAttrs (el, attrs) {
-	Object.keys(attrs).forEach(function (key) {
-		el.setAttribute(key, attrs[key]);
-	});
-}
-
-function addStyle (obj, options) {
-	var style, update, remove, result;
-
-	// If a transform function was defined, run it on the css
-	if (options.transform && obj.css) {
-	    result = options.transform(obj.css);
-
-	    if (result) {
-	    	// If transform returns a value, use that instead of the original css.
-	    	// This allows running runtime transformations on the css.
-	    	obj.css = result;
-	    } else {
-	    	// If the transform function returns a falsy value, don't add this css.
-	    	// This allows conditional loading of css
-	    	return function() {
-	    		// noop
-	    	};
-	    }
-	}
-
-	if (options.singleton) {
-		var styleIndex = singletonCounter++;
-
-		style = singleton || (singleton = createStyleElement(options));
-
-		update = applyToSingletonTag.bind(null, style, styleIndex, false);
-		remove = applyToSingletonTag.bind(null, style, styleIndex, true);
-
-	} else if (
-		obj.sourceMap &&
-		typeof URL === "function" &&
-		typeof URL.createObjectURL === "function" &&
-		typeof URL.revokeObjectURL === "function" &&
-		typeof Blob === "function" &&
-		typeof btoa === "function"
-	) {
-		style = createLinkElement(options);
-		update = updateLink.bind(null, style, options);
-		remove = function () {
-			removeStyleElement(style);
-
-			if(style.href) URL.revokeObjectURL(style.href);
-		};
-	} else {
-		style = createStyleElement(options);
-		update = applyToTag.bind(null, style);
-		remove = function () {
-			removeStyleElement(style);
-		};
-	}
-
-	update(obj);
-
-	return function updateStyle (newObj) {
-		if (newObj) {
-			if (
-				newObj.css === obj.css &&
-				newObj.media === obj.media &&
-				newObj.sourceMap === obj.sourceMap
-			) {
-				return;
-			}
-
-			update(obj = newObj);
-		} else {
-			remove();
-		}
-	};
-}
-
-var replaceText = (function () {
-	var textStore = [];
-
-	return function (index, replacement) {
-		textStore[index] = replacement;
-
-		return textStore.filter(Boolean).join('\n');
-	};
-})();
-
-function applyToSingletonTag (style, index, remove, obj) {
-	var css = remove ? "" : obj.css;
-
-	if (style.styleSheet) {
-		style.styleSheet.cssText = replaceText(index, css);
-	} else {
-		var cssNode = document.createTextNode(css);
-		var childNodes = style.childNodes;
-
-		if (childNodes[index]) style.removeChild(childNodes[index]);
-
-		if (childNodes.length) {
-			style.insertBefore(cssNode, childNodes[index]);
-		} else {
-			style.appendChild(cssNode);
-		}
-	}
-}
-
-function applyToTag (style, obj) {
-	var css = obj.css;
-	var media = obj.media;
-
-	if(media) {
-		style.setAttribute("media", media)
-	}
-
-	if(style.styleSheet) {
-		style.styleSheet.cssText = css;
-	} else {
-		while(style.firstChild) {
-			style.removeChild(style.firstChild);
-		}
-
-		style.appendChild(document.createTextNode(css));
-	}
-}
-
-function updateLink (link, options, obj) {
-	var css = obj.css;
-	var sourceMap = obj.sourceMap;
-
-	/*
-		If convertToAbsoluteUrls isn't defined, but sourcemaps are enabled
-		and there is no publicPath defined then lets turn convertToAbsoluteUrls
-		on by default.  Otherwise default to the convertToAbsoluteUrls option
-		directly
-	*/
-	var autoFixUrls = options.convertToAbsoluteUrls === undefined && sourceMap;
-
-	if (options.convertToAbsoluteUrls || autoFixUrls) {
-		css = fixUrls(css);
-	}
-
-	if (sourceMap) {
-		// http://stackoverflow.com/a/26603875
-		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
-	}
-
-	var blob = new Blob([css], { type: "text/css" });
-
-	var oldSrc = link.href;
-
-	link.href = URL.createObjectURL(blob);
-
-	if(oldSrc) URL.revokeObjectURL(oldSrc);
-}
-
-
-/***/ }),
-
-/***/ 702:
-/***/ (function(module, exports) {
-
-
-/**
- * When source maps are enabled, `style-loader` uses a link element with a data-uri to
- * embed the css on the page. This breaks all relative urls because now they are relative to a
- * bundle instead of the current page.
- *
- * One solution is to only use full urls, but that may be impossible.
- *
- * Instead, this function "fixes" the relative urls to be absolute according to the current page location.
- *
- * A rudimentary test suite is located at `test/fixUrls.js` and can be run via the `npm test` command.
- *
- */
-
-module.exports = function (css) {
-  // get current location
-  var location = typeof window !== "undefined" && window.location;
-
-  if (!location) {
-    throw new Error("fixUrls requires window.location");
-  }
-
-	// blank or null?
-	if (!css || typeof css !== "string") {
-	  return css;
-  }
-
-  var baseUrl = location.protocol + "//" + location.host;
-  var currentDir = baseUrl + location.pathname.replace(/\/[^\/]*$/, "/");
-
-	// convert each url(...)
-	/*
-	This regular expression is just a way to recursively match brackets within
-	a string.
-
-	 /url\s*\(  = Match on the word "url" with any whitespace after it and then a parens
-	   (  = Start a capturing group
-	     (?:  = Start a non-capturing group
-	         [^)(]  = Match anything that isn't a parentheses
-	         |  = OR
-	         \(  = Match a start parentheses
-	             (?:  = Start another non-capturing groups
-	                 [^)(]+  = Match anything that isn't a parentheses
-	                 |  = OR
-	                 \(  = Match a start parentheses
-	                     [^)(]*  = Match anything that isn't a parentheses
-	                 \)  = Match a end parentheses
-	             )  = End Group
-              *\) = Match anything and then a close parens
-          )  = Close non-capturing group
-          *  = Match anything
-       )  = Close capturing group
-	 \)  = Match a close parens
-
-	 /gi  = Get all matches, not the first.  Be case insensitive.
-	 */
-	var fixedCss = css.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi, function(fullMatch, origUrl) {
-		// strip quotes (if they exist)
-		var unquotedOrigUrl = origUrl
-			.trim()
-			.replace(/^"(.*)"$/, function(o, $1){ return $1; })
-			.replace(/^'(.*)'$/, function(o, $1){ return $1; });
-
-		// already a full url? no change
-		if (/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/)/i.test(unquotedOrigUrl)) {
-		  return fullMatch;
-		}
-
-		// convert the url to a full url
-		var newUrl;
-
-		if (unquotedOrigUrl.indexOf("//") === 0) {
-		  	//TODO: should we add protocol?
-			newUrl = unquotedOrigUrl;
-		} else if (unquotedOrigUrl.indexOf("/") === 0) {
-			// path should be relative to the base url
-			newUrl = baseUrl + unquotedOrigUrl; // already starts with '/'
-		} else {
-			// path should be relative to current directory
-			newUrl = currentDir + unquotedOrigUrl.replace(/^\.\//, ""); // Strip leading './'
-		}
-
-		// send back the fixed url(...)
-		return "url(" + JSON.stringify(newUrl) + ")";
-	});
-
-	// send back the fixed css
-	return fixedCss;
-};
-
-
-/***/ }),
-
-/***/ 703:
+/***/ 706:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var util = __webpack_require__(695);
-var translate = __webpack_require__(697).translate;
+var util = __webpack_require__(699);
+var translate = __webpack_require__(701).translate;
 
 /**
  * Node.getRootNode shim
@@ -2608,17 +2612,17 @@ module.exports = ContextMenu;
 
 /***/ }),
 
-/***/ 704:
+/***/ 707:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var url = __webpack_require__(732)
-  , equal = __webpack_require__(705)
-  , util = __webpack_require__(696)
-  , SchemaObject = __webpack_require__(707)
-  , traverse = __webpack_require__(739);
+var url = __webpack_require__(735)
+  , equal = __webpack_require__(708)
+  , util = __webpack_require__(700)
+  , SchemaObject = __webpack_require__(710)
+  , traverse = __webpack_require__(742);
 
 module.exports = resolve;
 
@@ -2887,7 +2891,7 @@ function resolveIds(schema) {
 
 /***/ }),
 
-/***/ 705:
+/***/ 708:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2938,13 +2942,13 @@ module.exports = function equal(a, b) {
 
 /***/ }),
 
-/***/ 706:
+/***/ 709:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var resolve = __webpack_require__(704);
+var resolve = __webpack_require__(707);
 
 module.exports = {
   Validation: errorSubclass(ValidationError),
@@ -2980,13 +2984,13 @@ function errorSubclass(Subclass) {
 
 /***/ }),
 
-/***/ 707:
+/***/ 710:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var util = __webpack_require__(696);
+var util = __webpack_require__(700);
 
 module.exports = SchemaObject;
 
@@ -2997,7 +3001,7 @@ function SchemaObject(obj) {
 
 /***/ }),
 
-/***/ 708:
+/***/ 711:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3064,7 +3068,7 @@ module.exports = function (data, opts) {
 
 /***/ }),
 
-/***/ 709:
+/***/ 712:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3530,7 +3534,7 @@ module.exports = function generate_validate(it, $keyword, $ruleType) {
 
 /***/ }),
 
-/***/ 710:
+/***/ 713:
 /***/ (function(module, exports) {
 
 
@@ -3774,7 +3778,7 @@ function isObject(val) {
 
 /***/ }),
 
-/***/ 711:
+/***/ 714:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3931,7 +3935,7 @@ module.exports = function generate__limit(it, $keyword, $ruleType) {
 
 /***/ }),
 
-/***/ 712:
+/***/ 715:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4015,7 +4019,7 @@ module.exports = function generate__limitItems(it, $keyword, $ruleType) {
 
 /***/ }),
 
-/***/ 713:
+/***/ 716:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4104,7 +4108,7 @@ module.exports = function generate__limitLength(it, $keyword, $ruleType) {
 
 /***/ }),
 
-/***/ 714:
+/***/ 717:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4188,13 +4192,13 @@ module.exports = function generate__limitProperties(it, $keyword, $ruleType) {
 
 /***/ }),
 
-/***/ 715:
+/***/ 718:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var ContextMenu = __webpack_require__(703);
+var ContextMenu = __webpack_require__(706);
 
 /**
  * Create a select box to be used in the editor menu's, which allows to switch mode
@@ -4311,7 +4315,7 @@ module.exports = ModeSwitcher;
 
 /***/ }),
 
-/***/ 716:
+/***/ 719:
 /***/ (function(module, exports) {
 
 module.exports = function() {
@@ -4321,13 +4325,13 @@ module.exports = function() {
 
 /***/ }),
 
-/***/ 721:
+/***/ 724:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(722);
+var content = __webpack_require__(725);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -4335,7 +4339,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(701)(content, options);
+var update = __webpack_require__(397)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -4353,22 +4357,22 @@ if(false) {
 
 /***/ }),
 
-/***/ 722:
+/***/ 725:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(700)(false);
+exports = module.exports = __webpack_require__(396)(false);
 // imports
 
 
 // module
-exports.push([module.i, ".layout-wrapper {\n  display: flex;\n}\n.layout-item {\n  border: 1px solid #eee;\n  min-height: 100px;\n}\n", ""]);
+exports.push([module.i, ".layout-wrapper {\n  display: flex;\n}\n.layout-item {\n  border: 1px solid #eee;\n  min-height: 100px;\n}\n.basic-component {\n  min-height: 50px;\n  border: 1px dashed #ccc;\n  margin: 10px;\n  position: relative;\n  overflow: hidden;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ 723:
+/***/ 726:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4513,6 +4517,15 @@ var Component = function (_React$Component) {
                     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
                 };
             }
+
+            if (children.com.component_name === 'button') {
+                return function (ctx) {
+                    __webpack_require__.e/* require.ensure */(10).then((function (require) {
+                        ctx.state.com = __webpack_require__(215);
+                        ctx.setState({});
+                    }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+                };
+            }
         }
     }, {
         key: 'componentDidMount',
@@ -4542,7 +4555,7 @@ var Component = function (_React$Component) {
                     'div',
                     { className: 'btn-nav' },
                     _react2.default.createElement('i', { className: 'icon icon-edit btn-oper', onClick: this.edit }),
-                    _react2.default.createElement('i', { className: 'icon icon-close btn-oper', onClick: this.edit })
+                    _react2.default.createElement('i', { className: 'icon icon-close btn-oper', onClick: this.close })
                 ) : null,
                 this.state.com ? _react2.default.createElement(this.state.com, this.props) : null
             );
@@ -4557,7 +4570,7 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 724:
+/***/ 727:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4571,15 +4584,15 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _input = __webpack_require__(725);
+var _input = __webpack_require__(728);
 
 var _input2 = _interopRequireDefault(_input);
 
-var _radio = __webpack_require__(726);
+var _radio = __webpack_require__(729);
 
 var _radio2 = _interopRequireDefault(_radio);
 
-var _jsoneditor = __webpack_require__(727);
+var _jsoneditor = __webpack_require__(730);
 
 var _jsoneditor2 = _interopRequireDefault(_jsoneditor);
 
@@ -4614,7 +4627,7 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 725:
+/***/ 728:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4694,7 +4707,7 @@ module.exports = exports["default"];
 
 /***/ }),
 
-/***/ 726:
+/***/ 729:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4785,7 +4798,7 @@ module.exports = exports["default"];
 
 /***/ }),
 
-/***/ 727:
+/***/ 730:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4802,7 +4815,7 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _jsoneditor = __webpack_require__(728);
+var _jsoneditor = __webpack_require__(731);
 
 var _jsoneditor2 = _interopRequireDefault(_jsoneditor);
 
@@ -4866,15 +4879,15 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 728:
+/***/ 731:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(729);
+module.exports = __webpack_require__(732);
 
 
 /***/ }),
 
-/***/ 729:
+/***/ 732:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4882,15 +4895,15 @@ module.exports = __webpack_require__(729);
 
 var Ajv;
 try {
-  Ajv = __webpack_require__(730);
+  Ajv = __webpack_require__(733);
 }
 catch (err) {
   // no problem... when we need Ajv we will throw a neat exception
 }
 
-var treemode = __webpack_require__(768);
-var textmode = __webpack_require__(778);
-var util = __webpack_require__(695);
+var treemode = __webpack_require__(771);
+var textmode = __webpack_require__(781);
+var util = __webpack_require__(699);
 
 /**
  * @constructor JSONEditor
@@ -5280,23 +5293,23 @@ module.exports = JSONEditor;
 
 /***/ }),
 
-/***/ 730:
+/***/ 733:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var compileSchema = __webpack_require__(731)
-  , resolve = __webpack_require__(704)
-  , Cache = __webpack_require__(740)
-  , SchemaObject = __webpack_require__(707)
-  , stableStringify = __webpack_require__(708)
-  , formats = __webpack_require__(741)
-  , rules = __webpack_require__(742)
-  , $dataMetaSchema = __webpack_require__(761)
-  , patternGroups = __webpack_require__(762)
-  , util = __webpack_require__(696)
-  , co = __webpack_require__(710);
+var compileSchema = __webpack_require__(734)
+  , resolve = __webpack_require__(707)
+  , Cache = __webpack_require__(743)
+  , SchemaObject = __webpack_require__(710)
+  , stableStringify = __webpack_require__(711)
+  , formats = __webpack_require__(744)
+  , rules = __webpack_require__(745)
+  , $dataMetaSchema = __webpack_require__(764)
+  , patternGroups = __webpack_require__(765)
+  , util = __webpack_require__(700)
+  , co = __webpack_require__(713);
 
 module.exports = Ajv;
 
@@ -5313,13 +5326,13 @@ Ajv.prototype.errorsText = errorsText;
 Ajv.prototype._addSchema = _addSchema;
 Ajv.prototype._compile = _compile;
 
-Ajv.prototype.compileAsync = __webpack_require__(763);
-var customKeyword = __webpack_require__(764);
+Ajv.prototype.compileAsync = __webpack_require__(766);
+var customKeyword = __webpack_require__(767);
 Ajv.prototype.addKeyword = customKeyword.add;
 Ajv.prototype.getKeyword = customKeyword.get;
 Ajv.prototype.removeKeyword = customKeyword.remove;
 
-var errorClasses = __webpack_require__(706);
+var errorClasses = __webpack_require__(709);
 Ajv.ValidationError = errorClasses.Validation;
 Ajv.MissingRefError = errorClasses.MissingRef;
 Ajv.$dataMetaSchema = $dataMetaSchema;
@@ -5731,11 +5744,11 @@ function addFormat(name, format) {
 function addDraft6MetaSchema(self) {
   var $dataSchema;
   if (self._opts.$data) {
-    $dataSchema = __webpack_require__(766);
+    $dataSchema = __webpack_require__(769);
     self.addMetaSchema($dataSchema, $dataSchema.$id, true);
   }
   if (self._opts.meta === false) return;
-  var metaSchema = __webpack_require__(767);
+  var metaSchema = __webpack_require__(770);
   if (self._opts.$data) metaSchema = $dataMetaSchema(metaSchema, META_SUPPORT_DATA);
   self.addMetaSchema(metaSchema, META_SCHEMA_ID, true);
   self._refs['http://json-schema.org/schema'] = META_SCHEMA_ID;
@@ -5790,26 +5803,26 @@ function noop() {}
 
 /***/ }),
 
-/***/ 731:
+/***/ 734:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var resolve = __webpack_require__(704)
-  , util = __webpack_require__(696)
-  , errorClasses = __webpack_require__(706)
-  , stableStringify = __webpack_require__(708);
+var resolve = __webpack_require__(707)
+  , util = __webpack_require__(700)
+  , errorClasses = __webpack_require__(709)
+  , stableStringify = __webpack_require__(711);
 
-var validateGenerator = __webpack_require__(709);
+var validateGenerator = __webpack_require__(712);
 
 /**
  * Functions below are used inside compiled validations function
  */
 
-var co = __webpack_require__(710);
+var co = __webpack_require__(713);
 var ucs2length = util.ucs2length;
-var equal = __webpack_require__(705);
+var equal = __webpack_require__(708);
 
 // this error is thrown by async schemas to return validation errors via exception
 var ValidationError = errorClasses.Validation;
@@ -6178,7 +6191,7 @@ function vars(arr, statement) {
 
 /***/ }),
 
-/***/ 732:
+/***/ 735:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6205,8 +6218,8 @@ function vars(arr, statement) {
 
 
 
-var punycode = __webpack_require__(733);
-var util = __webpack_require__(734);
+var punycode = __webpack_require__(736);
+var util = __webpack_require__(737);
 
 exports.parse = urlParse;
 exports.resolve = urlResolve;
@@ -6281,7 +6294,7 @@ var protocolPattern = /^([a-z0-9.+-]+:)/i,
       'gopher:': true,
       'file:': true
     },
-    querystring = __webpack_require__(735);
+    querystring = __webpack_require__(738);
 
 function urlParse(url, parseQueryString, slashesDenoteHost) {
   if (url && util.isObject(url) && url instanceof Url) return url;
@@ -6918,7 +6931,7 @@ Url.prototype.parseHost = function() {
 
 /***/ }),
 
-/***/ 733:
+/***/ 736:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module, global) {var __WEBPACK_AMD_DEFINE_RESULT__;/*! https://mths.be/punycode v1.4.1 by @mathias */
@@ -7458,7 +7471,7 @@ Url.prototype.parseHost = function() {
 
 /***/ }),
 
-/***/ 734:
+/***/ 737:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7482,19 +7495,19 @@ module.exports = {
 
 /***/ }),
 
-/***/ 735:
+/***/ 738:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-exports.decode = exports.parse = __webpack_require__(736);
-exports.encode = exports.stringify = __webpack_require__(737);
+exports.decode = exports.parse = __webpack_require__(739);
+exports.encode = exports.stringify = __webpack_require__(740);
 
 
 /***/ }),
 
-/***/ 736:
+/***/ 739:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7586,7 +7599,7 @@ var isArray = Array.isArray || function (xs) {
 
 /***/ }),
 
-/***/ 737:
+/***/ 740:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7679,7 +7692,7 @@ var objectKeys = Object.keys || function (obj) {
 
 /***/ }),
 
-/***/ 738:
+/***/ 741:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7707,7 +7720,7 @@ module.exports = function ucs2length(str) {
 
 /***/ }),
 
-/***/ 739:
+/***/ 742:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7796,7 +7809,7 @@ function escapeJsonPtr(str) {
 
 /***/ }),
 
-/***/ 740:
+/***/ 743:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7830,13 +7843,13 @@ Cache.prototype.clear = function Cache_clear() {
 
 /***/ }),
 
-/***/ 741:
+/***/ 744:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var util = __webpack_require__(696);
+var util = __webpack_require__(700);
 
 var DATE = /^\d\d\d\d-(\d\d)-(\d\d)$/;
 var DAYS = [0,31,29,31,30,31,30,31,31,30,31,30,31];
@@ -7973,14 +7986,14 @@ function regex(str) {
 
 /***/ }),
 
-/***/ 742:
+/***/ 745:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var ruleModules = __webpack_require__(743)
-  , toHash = __webpack_require__(696).toHash;
+var ruleModules = __webpack_require__(746)
+  , toHash = __webpack_require__(700).toHash;
 
 module.exports = function rules() {
   var RULES = [
@@ -8039,7 +8052,7 @@ module.exports = function rules() {
 
 /***/ }),
 
-/***/ 743:
+/***/ 746:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8047,38 +8060,38 @@ module.exports = function rules() {
 
 //all requires must be explicit because browserify won't work with dynamic requires
 module.exports = {
-  '$ref': __webpack_require__(744),
-  allOf: __webpack_require__(745),
-  anyOf: __webpack_require__(746),
-  const: __webpack_require__(747),
-  contains: __webpack_require__(748),
-  dependencies: __webpack_require__(749),
-  'enum': __webpack_require__(750),
-  format: __webpack_require__(751),
-  items: __webpack_require__(752),
-  maximum: __webpack_require__(711),
-  minimum: __webpack_require__(711),
-  maxItems: __webpack_require__(712),
-  minItems: __webpack_require__(712),
-  maxLength: __webpack_require__(713),
-  minLength: __webpack_require__(713),
-  maxProperties: __webpack_require__(714),
-  minProperties: __webpack_require__(714),
-  multipleOf: __webpack_require__(753),
-  not: __webpack_require__(754),
-  oneOf: __webpack_require__(755),
-  pattern: __webpack_require__(756),
-  properties: __webpack_require__(757),
-  propertyNames: __webpack_require__(758),
-  required: __webpack_require__(759),
-  uniqueItems: __webpack_require__(760),
-  validate: __webpack_require__(709)
+  '$ref': __webpack_require__(747),
+  allOf: __webpack_require__(748),
+  anyOf: __webpack_require__(749),
+  const: __webpack_require__(750),
+  contains: __webpack_require__(751),
+  dependencies: __webpack_require__(752),
+  'enum': __webpack_require__(753),
+  format: __webpack_require__(754),
+  items: __webpack_require__(755),
+  maximum: __webpack_require__(714),
+  minimum: __webpack_require__(714),
+  maxItems: __webpack_require__(715),
+  minItems: __webpack_require__(715),
+  maxLength: __webpack_require__(716),
+  minLength: __webpack_require__(716),
+  maxProperties: __webpack_require__(717),
+  minProperties: __webpack_require__(717),
+  multipleOf: __webpack_require__(756),
+  not: __webpack_require__(757),
+  oneOf: __webpack_require__(758),
+  pattern: __webpack_require__(759),
+  properties: __webpack_require__(760),
+  propertyNames: __webpack_require__(761),
+  required: __webpack_require__(762),
+  uniqueItems: __webpack_require__(763),
+  validate: __webpack_require__(712)
 };
 
 
 /***/ }),
 
-/***/ 744:
+/***/ 747:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8209,7 +8222,7 @@ module.exports = function generate_ref(it, $keyword, $ruleType) {
 
 /***/ }),
 
-/***/ 745:
+/***/ 748:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8260,7 +8273,7 @@ module.exports = function generate_allOf(it, $keyword, $ruleType) {
 
 /***/ }),
 
-/***/ 746:
+/***/ 749:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8341,7 +8354,7 @@ module.exports = function generate_anyOf(it, $keyword, $ruleType) {
 
 /***/ }),
 
-/***/ 747:
+/***/ 750:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8404,7 +8417,7 @@ module.exports = function generate_const(it, $keyword, $ruleType) {
 
 /***/ }),
 
-/***/ 748:
+/***/ 751:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8493,7 +8506,7 @@ module.exports = function generate_contains(it, $keyword, $ruleType) {
 
 /***/ }),
 
-/***/ 749:
+/***/ 752:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8668,7 +8681,7 @@ module.exports = function generate_dependencies(it, $keyword, $ruleType) {
 
 /***/ }),
 
-/***/ 750:
+/***/ 753:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8741,7 +8754,7 @@ module.exports = function generate_enum(it, $keyword, $ruleType) {
 
 /***/ }),
 
-/***/ 751:
+/***/ 754:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8898,7 +8911,7 @@ module.exports = function generate_format(it, $keyword, $ruleType) {
 
 /***/ }),
 
-/***/ 752:
+/***/ 755:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9046,7 +9059,7 @@ module.exports = function generate_items(it, $keyword, $ruleType) {
 
 /***/ }),
 
-/***/ 753:
+/***/ 756:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9130,7 +9143,7 @@ module.exports = function generate_multipleOf(it, $keyword, $ruleType) {
 
 /***/ }),
 
-/***/ 754:
+/***/ 757:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9221,7 +9234,7 @@ module.exports = function generate_not(it, $keyword, $ruleType) {
 
 /***/ }),
 
-/***/ 755:
+/***/ 758:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9299,7 +9312,7 @@ module.exports = function generate_oneOf(it, $keyword, $ruleType) {
 
 /***/ }),
 
-/***/ 756:
+/***/ 759:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9381,7 +9394,7 @@ module.exports = function generate_pattern(it, $keyword, $ruleType) {
 
 /***/ }),
 
-/***/ 757:
+/***/ 760:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9857,7 +9870,7 @@ module.exports = function generate_properties(it, $keyword, $ruleType) {
 
 /***/ }),
 
-/***/ 758:
+/***/ 761:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9946,7 +9959,7 @@ module.exports = function generate_propertyNames(it, $keyword, $ruleType) {
 
 /***/ }),
 
-/***/ 759:
+/***/ 762:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10222,7 +10235,7 @@ module.exports = function generate_required(it, $keyword, $ruleType) {
 
 /***/ }),
 
-/***/ 760:
+/***/ 763:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10301,7 +10314,7 @@ module.exports = function generate_uniqueItems(it, $keyword, $ruleType) {
 
 /***/ }),
 
-/***/ 761:
+/***/ 764:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10358,7 +10371,7 @@ module.exports = function (metaSchema, keywordsJsonPointers) {
 
 /***/ }),
 
-/***/ 762:
+/***/ 765:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10402,13 +10415,13 @@ module.exports = function (ajv) {
 
 /***/ }),
 
-/***/ 763:
+/***/ 766:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var MissingRefError = __webpack_require__(706).MissingRef;
+var MissingRefError = __webpack_require__(709).MissingRef;
 
 module.exports = compileAsync;
 
@@ -10500,14 +10513,14 @@ function compileAsync(schema, meta, callback) {
 
 /***/ }),
 
-/***/ 764:
+/***/ 767:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var IDENTIFIER = /^[a-z_$][a-z0-9_$-]*$/i;
-var customRuleCode = __webpack_require__(765);
+var customRuleCode = __webpack_require__(768);
 
 module.exports = {
   add: addKeyword,
@@ -10643,7 +10656,7 @@ function removeKeyword(keyword) {
 
 /***/ }),
 
-/***/ 765:
+/***/ 768:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10877,39 +10890,39 @@ module.exports = function generate_custom(it, $keyword, $ruleType) {
 
 /***/ }),
 
-/***/ 766:
+/***/ 769:
 /***/ (function(module, exports) {
 
 module.exports = {"$schema":"http://json-schema.org/draft-06/schema#","$id":"https://raw.githubusercontent.com/epoberezkin/ajv/master/lib/refs/$data.json#","description":"Meta-schema for $data reference (JSON-schema extension proposal)","type":"object","required":["$data"],"properties":{"$data":{"type":"string","anyOf":[{"format":"relative-json-pointer"},{"format":"json-pointer"}]}},"additionalProperties":false}
 
 /***/ }),
 
-/***/ 767:
+/***/ 770:
 /***/ (function(module, exports) {
 
 module.exports = {"$schema":"http://json-schema.org/draft-06/schema#","$id":"http://json-schema.org/draft-06/schema#","title":"Core schema meta-schema","definitions":{"schemaArray":{"type":"array","minItems":1,"items":{"$ref":"#"}},"nonNegativeInteger":{"type":"integer","minimum":0},"nonNegativeIntegerDefault0":{"allOf":[{"$ref":"#/definitions/nonNegativeInteger"},{"default":0}]},"simpleTypes":{"enum":["array","boolean","integer","null","number","object","string"]},"stringArray":{"type":"array","items":{"type":"string"},"uniqueItems":true,"default":[]}},"type":["object","boolean"],"properties":{"$id":{"type":"string","format":"uri-reference"},"$schema":{"type":"string","format":"uri"},"$ref":{"type":"string","format":"uri-reference"},"title":{"type":"string"},"description":{"type":"string"},"default":{},"examples":{"type":"array","items":{}},"multipleOf":{"type":"number","exclusiveMinimum":0},"maximum":{"type":"number"},"exclusiveMaximum":{"type":"number"},"minimum":{"type":"number"},"exclusiveMinimum":{"type":"number"},"maxLength":{"$ref":"#/definitions/nonNegativeInteger"},"minLength":{"$ref":"#/definitions/nonNegativeIntegerDefault0"},"pattern":{"type":"string","format":"regex"},"additionalItems":{"$ref":"#"},"items":{"anyOf":[{"$ref":"#"},{"$ref":"#/definitions/schemaArray"}],"default":{}},"maxItems":{"$ref":"#/definitions/nonNegativeInteger"},"minItems":{"$ref":"#/definitions/nonNegativeIntegerDefault0"},"uniqueItems":{"type":"boolean","default":false},"contains":{"$ref":"#"},"maxProperties":{"$ref":"#/definitions/nonNegativeInteger"},"minProperties":{"$ref":"#/definitions/nonNegativeIntegerDefault0"},"required":{"$ref":"#/definitions/stringArray"},"additionalProperties":{"$ref":"#"},"definitions":{"type":"object","additionalProperties":{"$ref":"#"},"default":{}},"properties":{"type":"object","additionalProperties":{"$ref":"#"},"default":{}},"patternProperties":{"type":"object","additionalProperties":{"$ref":"#"},"default":{}},"dependencies":{"type":"object","additionalProperties":{"anyOf":[{"$ref":"#"},{"$ref":"#/definitions/stringArray"}]}},"propertyNames":{"$ref":"#"},"const":{},"enum":{"type":"array","minItems":1,"uniqueItems":true},"type":{"anyOf":[{"$ref":"#/definitions/simpleTypes"},{"type":"array","items":{"$ref":"#/definitions/simpleTypes"},"minItems":1,"uniqueItems":true}]},"format":{"type":"string"},"allOf":{"$ref":"#/definitions/schemaArray"},"anyOf":{"$ref":"#/definitions/schemaArray"},"oneOf":{"$ref":"#/definitions/schemaArray"},"not":{"$ref":"#"}},"default":{}}
 
 /***/ }),
 
-/***/ 768:
+/***/ 771:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 
-var Highlighter = __webpack_require__(769);
-var History = __webpack_require__(770);
-var SearchBox = __webpack_require__(772);
-var ContextMenu = __webpack_require__(703);
-var TreePath = __webpack_require__(773);
-var Node = __webpack_require__(774);
-var ModeSwitcher = __webpack_require__(715);
-var util = __webpack_require__(695);
-var autocomplete = __webpack_require__(777);
-var translate = __webpack_require__(697).translate;
-var setLanguages = __webpack_require__(697).setLanguages;
-var setLanguage = __webpack_require__(697).setLanguage;
+var Highlighter = __webpack_require__(772);
+var History = __webpack_require__(773);
+var SearchBox = __webpack_require__(775);
+var ContextMenu = __webpack_require__(706);
+var TreePath = __webpack_require__(776);
+var Node = __webpack_require__(777);
+var ModeSwitcher = __webpack_require__(718);
+var util = __webpack_require__(699);
+var autocomplete = __webpack_require__(780);
+var translate = __webpack_require__(701).translate;
+var setLanguages = __webpack_require__(701).setLanguages;
+var setLanguage = __webpack_require__(701).setLanguage;
 
 // create a mixin with the functions for tree mode
 var treemode = {};
@@ -12260,7 +12273,7 @@ module.exports = [
 
 /***/ }),
 
-/***/ 769:
+/***/ 772:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12354,13 +12367,13 @@ module.exports = Highlighter;
 
 /***/ }),
 
-/***/ 770:
+/***/ 773:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var util = __webpack_require__(695);
+var util = __webpack_require__(699);
 
 /**
  * @constructor History
@@ -12629,7 +12642,7 @@ module.exports = History;
 
 /***/ }),
 
-/***/ 771:
+/***/ 774:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* Jison generated parser */
@@ -13053,7 +13066,7 @@ if (true) {
 
 /***/ }),
 
-/***/ 772:
+/***/ 775:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13377,13 +13390,13 @@ module.exports = SearchBox;
 
 /***/ }),
 
-/***/ 773:
+/***/ 776:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var ContextMenu = __webpack_require__(703);
+var ContextMenu = __webpack_require__(706);
 
 /**
  * Creates a component that visualize path selection in tree based editors
@@ -13491,17 +13504,17 @@ module.exports = TreePath;
 
 /***/ }),
 
-/***/ 774:
+/***/ 777:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var naturalSort = __webpack_require__(775);
-var ContextMenu = __webpack_require__(703);
-var appendNodeFactory = __webpack_require__(776);
-var util = __webpack_require__(695);
-var translate = __webpack_require__(697).translate;
+var naturalSort = __webpack_require__(778);
+var ContextMenu = __webpack_require__(706);
+var appendNodeFactory = __webpack_require__(779);
+var util = __webpack_require__(699);
+var translate = __webpack_require__(701).translate;
 
 /**
  * @constructor Node
@@ -17104,7 +17117,7 @@ module.exports = Node;
 
 /***/ }),
 
-/***/ 775:
+/***/ 778:
 /***/ (function(module, exports) {
 
 /*
@@ -17156,15 +17169,15 @@ module.exports = function naturalSort (a, b) {
 
 /***/ }),
 
-/***/ 776:
+/***/ 779:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var util = __webpack_require__(695);
-var ContextMenu = __webpack_require__(703);
-var translate = __webpack_require__(697).translate;
+var util = __webpack_require__(699);
+var ContextMenu = __webpack_require__(706);
+var translate = __webpack_require__(701).translate;
 
 /**
  * A factory function to create an AppendNode, which depends on a Node
@@ -17396,7 +17409,7 @@ module.exports = appendNodeFactory;
 
 /***/ }),
 
-/***/ 777:
+/***/ 780:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17785,15 +17798,15 @@ module.exports = completely;
 
 /***/ }),
 
-/***/ 778:
+/***/ 781:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var ace = __webpack_require__(779);
-var ModeSwitcher = __webpack_require__(715);
-var util = __webpack_require__(695);
+var ace = __webpack_require__(782);
+var ModeSwitcher = __webpack_require__(718);
+var util = __webpack_require__(699);
 
 // create a mixin with the functions for text mode
 var textmode = {};
@@ -17860,7 +17873,7 @@ textmode.create = function (container, options) {
   this.theme = options.theme || DEFAULT_THEME;
   if (this.theme === DEFAULT_THEME && _ace) {
     try {
-      __webpack_require__(784);
+      __webpack_require__(787);
     }
     catch (err) {
       console.error(err);
@@ -18461,7 +18474,7 @@ module.exports = [
 
 /***/ }),
 
-/***/ 779:
+/***/ 782:
 /***/ (function(module, exports, __webpack_require__) {
 
 var ace
@@ -18472,11 +18485,11 @@ if (window.ace) {
 else {
   try {
     // load brace
-    ace = __webpack_require__(780);
+    ace = __webpack_require__(783);
 
     // load required Ace plugins
-    __webpack_require__(781);
-    __webpack_require__(783);
+    __webpack_require__(784);
+    __webpack_require__(786);
   }
   catch (err) {
     // failed to load brace (can be minimalist bundle).
@@ -18489,7 +18502,7 @@ module.exports = ace;
 
 /***/ }),
 
-/***/ 780:
+/***/ 783:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* ***** BEGIN LICENSE BLOCK *****
@@ -22672,7 +22685,7 @@ init(true);function init(packaged) {
     if (!global || !global.document)
         return;
     
-    options.packaged = packaged || acequire.packaged || module.packaged || (global.define && __webpack_require__(716).packaged);
+    options.packaged = packaged || acequire.packaged || module.packaged || (global.define && __webpack_require__(719).packaged);
 
     var scriptOptions = {};
     var scriptUrl = "";
@@ -38699,7 +38712,7 @@ exports.config = acequire("./config");
 exports.acequire = acequire;
 
 if (true)
-    exports.define = __webpack_require__(716);
+    exports.define = __webpack_require__(719);
 exports.edit = function(el) {
     if (typeof el == "string") {
         var _id = el;
@@ -38767,7 +38780,7 @@ module.exports = window.ace.acequire("ace/ace");
 
 /***/ }),
 
-/***/ 781:
+/***/ 784:
 /***/ (function(module, exports, __webpack_require__) {
 
 ace.define("ace/mode/json_highlight_rules",["require","exports","module","ace/lib/oop","ace/mode/text_highlight_rules"], function(acequire, exports, module) {
@@ -39069,7 +39082,7 @@ oop.inherits(Mode, TextMode);
     };
 
     this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], __webpack_require__(782), "JsonWorker");
+        var worker = new WorkerClient(["ace"], __webpack_require__(785), "JsonWorker");
         worker.attachToDocument(session.getDocument());
 
         worker.on("annotate", function(e) {
@@ -39093,7 +39106,7 @@ exports.Mode = Mode;
 
 /***/ }),
 
-/***/ 782:
+/***/ 785:
 /***/ (function(module, exports) {
 
 module.exports.id = 'ace/mode/json_worker';
@@ -39101,7 +39114,7 @@ module.exports.src = "\"no use strict\";!function(window){function resolveModule
 
 /***/ }),
 
-/***/ 783:
+/***/ 786:
 /***/ (function(module, exports) {
 
 ace.define("ace/ext/searchbox",["require","exports","module","ace/lib/dom","ace/lib/lang","ace/lib/event","ace/keyboard/hash_handler","ace/lib/keys"], function(acequire, exports, module) {
@@ -39615,7 +39628,7 @@ exports.Search = function(editor, isReplace) {
 
 /***/ }),
 
-/***/ 784:
+/***/ 787:
 /***/ (function(module, exports) {
 
 /* ***** BEGIN LICENSE BLOCK *****
@@ -39767,7 +39780,7 @@ dom.importCssString(exports.cssText, exports.cssClass);
 
 /***/ }),
 
-/***/ 785:
+/***/ 788:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

@@ -1,4 +1,4 @@
-webpackJsonp([11],[
+webpackJsonp([12],[
 /* 0 */,
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -2755,8 +2755,17 @@ var Component = function (_React$Component) {
 
             if (children.com.component_name === 'layout') {
                 return function (ctx) {
-                    __webpack_require__.e/* require.ensure */(10).then((function (require) {
+                    __webpack_require__.e/* require.ensure */(11).then((function (require) {
                         ctx.state.com = __webpack_require__(214);
+                        ctx.setState({});
+                    }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
+                };
+            }
+
+            if (children.com.component_name === 'button') {
+                return function (ctx) {
+                    __webpack_require__.e/* require.ensure */(10).then((function (require) {
+                        ctx.state.com = __webpack_require__(215);
                         ctx.setState({});
                     }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
                 };
@@ -2790,7 +2799,7 @@ var Component = function (_React$Component) {
                     'div',
                     { className: 'btn-nav' },
                     _react2.default.createElement('i', { className: 'icon icon-edit btn-oper', onClick: this.edit }),
-                    _react2.default.createElement('i', { className: 'icon icon-close btn-oper', onClick: this.edit })
+                    _react2.default.createElement('i', { className: 'icon icon-close btn-oper', onClick: this.close })
                 ) : null,
                 this.state.com ? _react2.default.createElement(this.state.com, this.props) : null
             );
@@ -2803,7 +2812,7 @@ var Component = function (_React$Component) {
 exports.default = Component;
 
 
-var components = '[{"com":{"component_name":"datePicker","component_path":"components/js/datePicker/index","component_desc":"时间选择器","component_meta":{"url":{"name":"获取数据","type":"string"},"content":{"name":"文本内容","type":"string"}},"component_type":"filter","component_id":0}},{"com":{"component_name":"layout","component_path":"components/js/layout/index","component_desc":"自定义布局","component_meta":{"url":{"name":"获取数据","type":"string"},"content":{"name":"定义布局","type":"jsoneditor","value":{"1":1,"2":2}}},"component_type":"layout","component_id":3,"component_child":{"0":[{"com":{"component_name":"text","component_path":"components/js/text/index","component_desc":"文本","component_meta":{"label":{"name":"文本组件","type":"string","value":"fff"},"content":{"name":"文本内容","type":"string","value":"oooooo"},"style":{"name":"样式","type":"radio","def":"style","options":{"center":"居中","left":"居左","right":"居右"}}},"component_type":"chart"}}],"1":[{"com":{"component_name":"text","component_path":"components/js/text/index","component_desc":"文本","component_meta":{"label":{"name":"文本组件","type":"string"},"content":{"name":"文本内容","type":"string","value":"tttttt"},"style":{"name":"样式","type":"radio","def":"style","options":{"center":"居中","left":"居左","right":"居右"}}},"component_type":"chart"}}]}}}]';
+var components = '[{"com":{"component_name":"layout","component_path":"components/js/layout/index","component_desc":"自定义布局","component_meta":{"url":{"name":"获取数据","type":"string"},"content":{"name":"定义布局","type":"jsoneditor","value":{"key":1,"div":2}}},"component_type":"layout","component_id":0,"component_child":{"0":[{"com":{"component_name":"text","component_path":"components/js/text/index","component_desc":"文本","component_meta":{"label":{"name":"文本组件","type":"string","value":"ff"},"content":{"name":"文本内容","type":"string","value":"ttiiiff"},"style":{"name":"样式","type":"radio","def":"style","options":{"center":"居中","left":"居左","right":"居右"}}},"component_type":"chart"}}],"1":[{"com":{"component_name":"pieChart","component_path":"components/js/pie/index","component_desc":"饼状图","component_meta":{"url":{"name":"获取数据","type":"string","value":"https://www.easy-mock.com/mock/5aadcefad923ab62b0bb4f4b/project/piechart"},"content":{"name":"文本内容","type":"string"}},"component_type":"chart"}}]}}}]';
 
 var App = (_dec = (0, _reactDnd.DragDropContext)(_reactDndHtml5Backend2.default), _dec(_class = function (_React$Component2) {
     _inherits(App, _React$Component2);

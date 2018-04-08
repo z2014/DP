@@ -18,7 +18,7 @@ export default class Layout extends React.Component{
                     this.config.content.value ? Object.keys(this.config.content.value).map((key, index) => {
                         const style = { flex: `${this.config.content.value[key]}`}
                         return <LayoutItem style={style} key={index} {...this.props} index={index}/>
-                    }) : null
+                    }) : <LayoutItem style={{flex: 1}} key={0} {...this.props} index={0}/>
                 }
             </div>
         )

@@ -1,4 +1,5 @@
 import React from 'react'
+import '../../../style/chart.less'
 import request from '../../../src/request/request'
 
 const Wrapper = (ChartInner) => {
@@ -30,7 +31,9 @@ const Wrapper = (ChartInner) => {
         }
         render() {
             return(
-                <ChartInner {...this.props} data={this.state.data}/>
+                <div className="chart-wrapper">
+                    <ChartInner {...this.props} data={this.state.data}/>
+                </div>
             )
         }
     }

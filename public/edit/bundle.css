@@ -36,6 +36,13 @@
   transition: all 0.5s 0s linear;
   overflow: hidden;
 }
+.basic-component {
+  border: 1px dashed #ccc;
+  padding: 20px;
+}
+.layout-item {
+  border: 1px solid #eee;
+}
 .mainpanel {
   position: relative;
   flex: 4;
@@ -65,12 +72,6 @@
 .com:hover {
   box-shadow: 2px 2px #ccc;
   cursor: pointer;
-}
-.basic-component {
-  min-height: 50px;
-  border: 1px dashed #ccc;
-  margin: 10px;
-  position: relative;
 }
 .btn-nav {
   z-index: 5;
@@ -188,6 +189,8 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  vertical-align: sub;
+  margin-right: 5px;
 }
 .icon-up {
   background-image: url('/img/up.png');
@@ -197,6 +200,9 @@
 }
 .icon-close {
   background-image: url('/img/close.png');
+}
+.basic-margin {
+  margin: 10px;
 }
 a {
   text-decoration: none;

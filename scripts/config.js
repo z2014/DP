@@ -64,4 +64,28 @@ module.exports = [{
     'component_desc': '自定义布局',
     'component_meta': require('./meta/config_layout.js'),
     'component_type': 'layout'
+}, {
+    'component_name': 'button',
+    'component_path': 'components/js/button/index',
+    'component_desc': '按钮',
+    'component_meta': require('./meta/config_button.js'),
+    'component_type': 'filter'
+}, {
+    'component_name': 'affix',
+    'component_path': 'components/js/affix/index',
+    'component_desc': '固钉',
+    'component_meta': require('./meta/config_affix.js'),
+    'component_type': 'filter'
+}, {
+    'component_name': 'nav',
+    'component_path': 'components/js/nav/index',
+    'component_desc': '顶部栏',
+    'component_meta': require('./meta/config_nav.js'),
+    'component_type': 'layout'
+}, {
+    'component_name': 'table',
+    'component_path': 'components/js/table/index',
+    'component_desc': '表格',
+    'component_meta': require('./meta/config_table.js'),
+    'component_type': 'chart'
 }]

@@ -1,6 +1,6 @@
 webpackJsonp([6],{
 
-/***/ 109:
+/***/ 112:
 /***/ (function(module, exports) {
 
 
@@ -96,7 +96,7 @@ module.exports = function (css) {
 
 /***/ }),
 
-/***/ 308:
+/***/ 309:
 /***/ (function(module, exports) {
 
 /*
@@ -179,7 +179,7 @@ function toComment(sourceMap) {
 
 /***/ }),
 
-/***/ 309:
+/***/ 310:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -235,7 +235,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(109);
+var	fixUrls = __webpack_require__(112);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -552,7 +552,7 @@ function updateLink (link, options, obj) {
 
 /***/ }),
 
-/***/ 319:
+/***/ 320:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -569,7 +569,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(804);
+__webpack_require__(805);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -592,13 +592,10 @@ var SearchInput = function (_React$Component) {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(
-                    'div',
-                    { contentEditable: 'true', className: 'searchinput' },
-                    _react2.default.createElement('i', { className: 'icon icon-search' })
-                )
+                'span',
+                { className: 'search-wrapper' },
+                _react2.default.createElement('input', { contentEditable: 'true', className: 'searchinput' }),
+                _react2.default.createElement('i', { className: 'icon icon-search' })
             );
         }
     }]);
@@ -611,13 +608,13 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 804:
+/***/ 805:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(805);
+var content = __webpack_require__(806);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -625,7 +622,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(309)(content, options);
+var update = __webpack_require__(310)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -643,15 +640,15 @@ if(false) {
 
 /***/ }),
 
-/***/ 805:
+/***/ 806:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(308)(false);
+exports = module.exports = __webpack_require__(309)(false);
 // imports
 
 
 // module
-exports.push([module.i, ".searchinput {\n  width: 40px;\n  height: 24px;\n  border: 1px solid #eee;\n  position: absolute;\n  right: 0px;\n  bottom: 0px;\n  transition: all 0.5s 0s linear;\n}\n.searchinput:hover {\n  width: 200px;\n}\n.icon {\n  display: inline-block;\n  width: 20px;\n  height: 20px;\n  margin: 0 auto;\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: cover;\n}\n.icon-search {\n  background-image: url('/img/search.png');\n  position: absolute;\n  right: 0px;\n}\n", ""]);
+exports.push([module.i, ".search-wrapper {\n  width: 200px;\n  display: inline-block;\n  position: relative;\n}\n.searchinput {\n  height: 24px;\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n  list-style: none;\n  position: relative;\n  display: inline-block;\n  padding: 4px 11px;\n  width: 100%;\n  height: 32px;\n  font-size: 14px;\n  line-height: 1.5;\n  color: rgba(0, 0, 0, 0.65);\n  background-color: #fff;\n  background-image: none;\n  border: 1px solid #d9d9d9;\n  border-radius: 4px;\n  transition: all 0.3s;\n}\n.icon {\n  display: inline-block;\n  width: 20px;\n  height: 20px;\n  margin: 0 auto;\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: cover;\n  vertical-align: sub;\n  margin-right: 5px;\n}\n.icon-search {\n  background-image: url('/img/search.png');\n  position: absolute;\n  right: 0px;\n}\ninput {\n  text-rendering: auto;\n  color: initial;\n  letter-spacing: normal;\n  word-spacing: normal;\n  text-transform: none;\n  text-indent: 0px;\n  text-shadow: none;\n  display: inline-block;\n  text-align: start;\n  margin: 0em;\n  font: 400 11px system-ui;\n}\n", ""]);
 
 // exports
 

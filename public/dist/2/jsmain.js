@@ -1,5 +1,7 @@
 // import React from 'react'
 import ReactDOM from 'react-dom'
+import { DragDropContext } from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend'
 
 
     // 来自于generate.js，模版生成
@@ -81,12 +83,12 @@ import ReactDOM from 'react-dom'
                 }
             }
         
-            if (children.com.component_name === 'layout') {
+            if (children.com.component_name === 'sidebar') {
                 return (ctx) => {
                     require.ensure([], (require) => {
-                        ctx.state.com = require('/Users/a2014/Desktop/project/scripts/components/js/layout/index')
+                        ctx.state.com = require('/Users/a2014/Desktop/project/scripts/components/js/sidebar/index')
                         ctx.setState({})
-                    }, 'layout')
+                    }, 'sidebar')
                 }
             }
         
@@ -105,6 +107,15 @@ import ReactDOM from 'react-dom'
                         ctx.state.com = require('/Users/a2014/Desktop/project/scripts/components/js/searchInput/index')
                         ctx.setState({})
                     }, 'searchInput')
+                }
+            }
+        
+            if (children.com.component_name === 'layout') {
+                return (ctx) => {
+                    require.ensure([], (require) => {
+                        ctx.state.com = require('/Users/a2014/Desktop/project/scripts/components/js/layout/index')
+                        ctx.setState({})
+                    }, 'layout')
                 }
             }
         
@@ -131,8 +142,8 @@ import ReactDOM from 'react-dom'
                     {
                         false ? 
                         (<div className="btn-nav">
-                            <img src="/img/edit.png" className="btn-oper" onClick={this.edit}/>
-                            <img src="/img/close.png" className="btn-oper" onClick={this.close}/>
+                            <i className="icon icon-edit btn-oper" onClick={this.edit} />
+                            <i className="icon icon-close btn-oper" onClick={this.close} />
                         </div>) : null
                     }
                     { this.state.com ? React.createElement(this.state.com, this.props) : null }     
@@ -145,6 +156,7 @@ import ReactDOM from 'react-dom'
 
 const components = '[{"com":{"component_name":"text","component_path":"components/js/text/index","component_desc":"文本","component_meta":{"label":{"name":"文本组件","type":"string"},"content":{"name":"文本内容","type":"string","value":"流量页面"},"style":{"name":"样式","type":"radio","def":"style","options":{"center":"居中","left":"居左","right":"居右"}}},"component_id":0}},{"com":{"component_name":"lineChart","component_path":"components/js/line/index","component_desc":"折线图","component_meta":{"url":{"name":"获取数据","type":"string","value":"https://www.easy-mock.com/mock/5aadcefad923ab62b0bb4f4b/project/line"},"content":{"name":"文本内容","type":"string"}},"component_type":"chart","component_id":1}},{"com":{"component_name":"text","component_path":"components/js/text/index","component_desc":"文本","component_meta":{"label":{"name":"文本组件","type":"string"},"content":{"name":"文本内容","type":"string","value":"将顶焦度计"},"style":{"name":"样式","type":"radio","def":"style","options":{"center":"居中","left":"居左","right":"居右"},"value":"center"}},"component_type":"chart","component_id":2}}]'
 
+@DragDropContext(HTML5Backend)
 class App extends React.Component {
     render() {
         let test = JSON.parse(components)

@@ -1,6 +1,6 @@
 webpackJsonp([5],{
 
-/***/ 109:
+/***/ 112:
 /***/ (function(module, exports) {
 
 
@@ -96,7 +96,7 @@ module.exports = function (css) {
 
 /***/ }),
 
-/***/ 308:
+/***/ 309:
 /***/ (function(module, exports) {
 
 /*
@@ -179,7 +179,7 @@ function toComment(sourceMap) {
 
 /***/ }),
 
-/***/ 309:
+/***/ 310:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -235,7 +235,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(109);
+var	fixUrls = __webpack_require__(112);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -552,7 +552,7 @@ function updateLink (link, options, obj) {
 
 /***/ }),
 
-/***/ 317:
+/***/ 318:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -563,13 +563,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = undefined;
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-__webpack_require__(808);
+__webpack_require__(803);
+
+var _index = __webpack_require__(821);
+
+var _index2 = _interopRequireDefault(_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -587,18 +593,28 @@ var Sidebar = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (Sidebar.__proto__ || Object.getPrototypeOf(Sidebar)).call(this, props));
 
+        _this.selectIcon = function (key) {
+            if (key === '日志监控') {
+                return _react2.default.createElement('i', { className: 'icon icon-dashboard' });
+            } else if (key === '流量转化') {
+                return _react2.default.createElement('i', { className: 'icon icon-liuliang' });
+            } else if (key === '盈利分布') {
+                return _react2.default.createElement('i', { className: 'icon icon-yingli' });
+            }
+        };
+
         _this.config = _this.props.com.com.component_meta;
         _this.state = {
-            url: _this.config.content.value ? Object.keys(_this.config.content.value)[0] : ''
+            url: _this.config.content.value ? _this.config.content.value[Object.keys(_this.config.content.value)[0]] : ''
         };
         return _this;
     }
 
     _createClass(Sidebar, [{
         key: 'changeUrl',
-        value: function changeUrl(ev) {
+        value: function changeUrl(ev, obj) {
             this.setState({
-                url: ev.target.innerHTML
+                url: obj[ev.target.innerHTML]
             });
         }
     }, {
@@ -606,7 +622,7 @@ var Sidebar = function (_React$Component) {
         value: function componentDidMount() {
             try {
                 var iframe = document.getElementById('iframe');
-                var wrapper = document.getElementsByClassName('layout-iframe')[0];
+                var wrapper = document.getElementsByClassName('sidebar-iframe')[0];
                 iframe.width = wrapper.offsetWidth;
             } catch (err) {
                 console.warn(err);
@@ -624,28 +640,75 @@ var Sidebar = function (_React$Component) {
                     'div',
                     { className: 'sidebar-side' },
                     this.config.content.value ? Object.keys(this.config.content.value).map(function (key, index) {
-                        if (key === _this2.state.url) {
+                        if (typeof _this2.config.content.value[key] === 'string') {
+                            var child = _this2.config.content.value;
+                            if (child[key] === _this2.state.url) {
+                                return _react2.default.createElement(
+                                    'span',
+                                    { key: index, className: 'sidebar-item sidebar-select' },
+                                    _this2.selectIcon(key),
+                                    _react2.default.createElement(
+                                        'span',
+                                        { onClick: function onClick(ev) {
+                                                return _this2.changeUrl(ev, child);
+                                            } },
+                                        key
+                                    )
+                                );
+                            }
                             return _react2.default.createElement(
                                 'span',
-                                { key: index, className: 'sidebar-item sidebar-select', onClick: function onClick(ev) {
-                                        return _this2.changeUrl(ev);
-                                    } },
-                                key
+                                { key: index, className: 'sidebar-item' },
+                                _this2.selectIcon(key),
+                                _react2.default.createElement(
+                                    'span',
+                                    { onClick: function onClick(ev) {
+                                            return _this2.changeUrl(ev, child);
+                                        } },
+                                    key
+                                )
+                            );
+                        } else if (_typeof(_this2.config.content.value[key]) === 'object') {
+                            var _child = _this2.config.content.value[key];
+                            return _react2.default.createElement(
+                                _index2.default,
+                                { type: key, key: key },
+                                Object.keys(_child).map(function (key, index) {
+                                    if (_child[key] === _this2.state.url) {
+                                        return _react2.default.createElement(
+                                            'span',
+                                            { key: index, className: 'sidebar-item-child sidebar-select' },
+                                            _react2.default.createElement('i', { className: 'icon icon-user' }),
+                                            _react2.default.createElement(
+                                                'span',
+                                                { onClick: function onClick(ev) {
+                                                        return _this2.changeUrl(ev, _child);
+                                                    } },
+                                                key
+                                            )
+                                        );
+                                    }
+                                    return _react2.default.createElement(
+                                        'span',
+                                        { key: index, className: 'sidebar-item-child' },
+                                        _react2.default.createElement('i', { className: 'icon icon-user' }),
+                                        _react2.default.createElement(
+                                            'span',
+                                            { onClick: function onClick(ev) {
+                                                    return _this2.changeUrl(ev, _child);
+                                                } },
+                                            key
+                                        )
+                                    );
+                                })
                             );
                         }
-                        return _react2.default.createElement(
-                            'span',
-                            { key: index, className: 'sidebar-item', onClick: function onClick(ev) {
-                                    return _this2.changeUrl(ev);
-                                } },
-                            key
-                        );
                     }) : null
                 ),
                 _react2.default.createElement(
                     'div',
                     { className: 'sidebar-iframe' },
-                    this.state.url !== '' ? _react2.default.createElement('iframe', { src: this.config.content.value[this.state.url], id: 'iframe', ref: 'iframe', width: '600px', height: '800px', frameBorder: '0' }) : null
+                    this.state.url !== '' ? _react2.default.createElement('iframe', { src: this.state.url, id: 'iframe', ref: 'iframe', width: '1000px', height: '800px', frameBorder: '0' }) : null
                 )
             );
         }
@@ -659,13 +722,13 @@ module.exports = exports['default'];
 
 /***/ }),
 
-/***/ 808:
+/***/ 803:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(809);
+var content = __webpack_require__(804);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -673,7 +736,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(309)(content, options);
+var update = __webpack_require__(310)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -691,18 +754,109 @@ if(false) {
 
 /***/ }),
 
-/***/ 809:
+/***/ 804:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(308)(false);
+exports = module.exports = __webpack_require__(309)(false);
 // imports
 
 
 // module
-exports.push([module.i, ".sidebar-wrapper {\n  overflow: hidden;\n}\n.sidebar-side {\n  float: left;\n  width: 100px;\n  margin-bottom: -9999px;\n  padding-bottom: 9999px;\n  border: 1px solid #eee;\n}\n.sidebar-iframe {\n  float: left;\n  min-height: 200px;\n}\n.sidebar-item {\n  display: block;\n  width: 100%;\n  box-sizing: border-box;\n  text-align: center;\n  padding: 10px;\n  background-color: #eee;\n  cursor: pointer;\n}\n.sidebar-select {\n  background-color: #ccc;\n}\n", ""]);
+exports.push([module.i, "body {\n  margin: 0;\n  padding: 0;\n}\n.sidebar-wrapper {\n  overflow: hidden;\n}\n.sidebar-side {\n  float: left;\n  width: 150px;\n  margin-bottom: -9999px;\n  padding-bottom: 9999px;\n  border: 1px solid #eee;\n  background-color: #001529;\n}\n.sidebar-iframe {\n  overflow: auto;\n  min-height: 200px;\n}\n.sidebar-item {\n  display: block;\n  width: 100%;\n  box-sizing: border-box;\n  text-align: center;\n  padding: 10px;\n  background-color: #001529;\n  color: gray;\n  cursor: pointer;\n  font-size: 12px;\n}\n.sidebar-item-child {\n  display: block;\n  width: 100%;\n  box-sizing: border-box;\n  text-align: center;\n  padding: 10px;\n  background-color: black;\n  color: gray;\n  cursor: pointer;\n  font-size: 12px;\n}\n.sidebar-item-child:before {\n  width: 20px;\n  height: 1px;\n  display: inline-block;\n  content: '';\n}\n.sidebar-select {\n  background-color: #1890ff;\n  color: white;\n}\n.basic-component {\n  min-height: 50px;\n  position: relative;\n  overflow: hidden;\n}\n.icon {\n  display: inline-block;\n  width: 20px;\n  height: 20px;\n  margin: 0 auto;\n  background-repeat: no-repeat;\n  background-position: center;\n  background-size: cover;\n  vertical-align: sub;\n  margin-right: 5px;\n}\n.icon-dashboard {\n  background-image: url('/img/dashboard.png');\n}\n.icon-yingli {\n  background-image: url('/img/yingli.png');\n}\n.icon-liuliang {\n  background-image: url('/img/liuliang.png');\n}\n.icon-menu {\n  background-image: url('/img/menu.png');\n}\n.icon-fold {\n  background-image: url('/img/fold.png');\n}\n.icon-user {\n  background-image: url('/img/user.png');\n}\n", ""]);
 
 // exports
 
+
+/***/ }),
+
+/***/ 821:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Menu = function (_React$Component) {
+    _inherits(Menu, _React$Component);
+
+    function Menu(props) {
+        _classCallCheck(this, Menu);
+
+        var _this = _possibleConstructorReturn(this, (Menu.__proto__ || Object.getPrototypeOf(Menu)).call(this, props));
+
+        _this.toggle = function () {
+            var deg = _this.refs.icon.style.transform;
+            if (deg === 'rotate(180deg)') {
+                _this.refs.icon.style.transform = 'rotate(0deg)';
+                var bheight = _this.refs.wrapper.offsetHeight + _this.refs.child.offsetHeight;
+                _this.refs.wrapper.style.height = bheight + 'px';
+            } else {
+                _this.refs.icon.style.transform = 'rotate(180deg)';
+                _this.refs.wrapper.style.height = '40px';
+            }
+        };
+
+        _this.state = {
+            show: true
+        };
+        return _this;
+    }
+
+    _createClass(Menu, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.refs.wrapper.style.height = this.refs.wrapper.offsetHeight + 'px';
+            this.refs.icon.style.transition = 'all 0.3s 0s linear';
+            this.refs.wrapper.style.transition = 'all 0.3s 0s linear';
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                { ref: 'wrapper', style: { overflow: 'hidden' } },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'sidebar-item' },
+                    _react2.default.createElement('i', { className: 'icon icon-menu', onClick: this.toggle, ref: 'icon' }),
+                    _react2.default.createElement(
+                        'span',
+                        null,
+                        this.props.type
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { style: { overflow: 'hidden', backgroundColor: 'black' }, ref: 'child' },
+                    this.props.children
+                )
+            );
+        }
+    }]);
+
+    return Menu;
+}(_react2.default.Component);
+
+exports.default = Menu;
+module.exports = exports['default'];
 
 /***/ })
 

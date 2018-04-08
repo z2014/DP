@@ -114,6 +114,42 @@
                 }
             }
         
+            if (children.com.component_name === 'button') {
+                return (ctx) => {
+                    require.ensure([], (require) => {
+                        ctx.state.com = require('/Users/a2014/Desktop/project/scripts/components/js/button/index')
+                        ctx.setState({})
+                    }, 'button')
+                }
+            }
+        
+            if (children.com.component_name === 'affix') {
+                return (ctx) => {
+                    require.ensure([], (require) => {
+                        ctx.state.com = require('/Users/a2014/Desktop/project/scripts/components/js/affix/index')
+                        ctx.setState({})
+                    }, 'affix')
+                }
+            }
+        
+            if (children.com.component_name === 'nav') {
+                return (ctx) => {
+                    require.ensure([], (require) => {
+                        ctx.state.com = require('/Users/a2014/Desktop/project/scripts/components/js/nav/index')
+                        ctx.setState({})
+                    }, 'nav')
+                }
+            }
+        
+            if (children.com.component_name === 'table') {
+                return (ctx) => {
+                    require.ensure([], (require) => {
+                        ctx.state.com = require('/Users/a2014/Desktop/project/scripts/components/js/table/index')
+                        ctx.setState({})
+                    }, 'table')
+                }
+            }
+        
         }
 
         componentDidMount() {

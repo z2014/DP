@@ -1,0 +1,55 @@
+thead tr th.basic-th{
+    background-color: #fafafa;
+    padding: 16px;
+    font-size: 14px;
+}
+tbody tr td.basic-td{
+    transition: all 0.3s;
+    border-bottom: 1px solid #e8e8e8;
+    border-right: 1px solid #e8e8e8;
+    word-break: break-all;
+    padding: 16px;
+    font-size: 14px;
+}
+tbody tr.basic-tr:hover{
+    background-color: rgba(24,144,255,0.2);
+    opacity: 0.5;
+}
+table{
+    border-collapse: collapse;
+}
+.table-center{
+    min-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.pagination-btn{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    box-sizing: content-box;
+    border: 1px solid #ccc;
+    vertical-align: bottom;
+    text-align: center;
+    line-height: 40px;
+    margin-right: 5px;
+    border-radius: 8px;
+}
+.pagination-btn:hover{
+    border: 1px solid #1890ff;
+    transition: all 0.3s;
+}
+.pagination-wrapper{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.icon-left{
+    background-image: url('/img/left.png');
+}
+.icon-right{
+    background-image: url('/img/right.png');
+}

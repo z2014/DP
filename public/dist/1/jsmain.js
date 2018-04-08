@@ -1,5 +1,7 @@
 // import React from 'react'
 import ReactDOM from 'react-dom'
+import { DragDropContext } from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend'
 
 
     // 来自于generate.js，模版生成
@@ -117,6 +119,33 @@ import ReactDOM from 'react-dom'
                 }
             }
         
+            if (children.com.component_name === 'button') {
+                return (ctx) => {
+                    require.ensure([], (require) => {
+                        ctx.state.com = require('/Users/a2014/Desktop/project/scripts/components/js/button/index')
+                        ctx.setState({})
+                    }, 'button')
+                }
+            }
+        
+            if (children.com.component_name === 'affix') {
+                return (ctx) => {
+                    require.ensure([], (require) => {
+                        ctx.state.com = require('/Users/a2014/Desktop/project/scripts/components/js/affix/index')
+                        ctx.setState({})
+                    }, 'affix')
+                }
+            }
+        
+            if (children.com.component_name === 'nav') {
+                return (ctx) => {
+                    require.ensure([], (require) => {
+                        ctx.state.com = require('/Users/a2014/Desktop/project/scripts/components/js/nav/index')
+                        ctx.setState({})
+                    }, 'nav')
+                }
+            }
+        
         }
 
         componentDidMount() {
@@ -140,8 +169,8 @@ import ReactDOM from 'react-dom'
                     {
                         false ? 
                         (<div className="btn-nav">
-                            <img src="/img/edit.png" className="btn-oper" onClick={this.edit}/>
-                            <img src="/img/close.png" className="btn-oper" onClick={this.close}/>
+                            <i className="icon icon-edit btn-oper" onClick={this.edit} />
+                            <i className="icon icon-close btn-oper" onClick={this.close} />
                         </div>) : null
                     }
                     { this.state.com ? React.createElement(this.state.com, this.props) : null }     
@@ -152,8 +181,9 @@ import ReactDOM from 'react-dom'
     
 
 
-const components = '[{"com":{"component_name":"layout","component_path":"components/js/layout/index","component_desc":"布局","component_meta":{"url":{"name":"获取数据","type":"string"},"content":{"name":"路由信息","type":"jsoneditor","value":{"性能监控":"//localhost:4040/preview/pc/2","流量转化":"//localhost:4040/preview/pc/3"}}},"component_id":0}}]'
+const components = '[{"com":{"component_name":"sidebar","component_path":"components/js/sidebar/index","component_desc":"侧边栏","component_meta":{"url":{"name":"获取数据","type":"string"},"content":{"name":"路由信息","type":"jsoneditor","value":{"日志监控":"http://localhost:4040/preview/pc/2","流量转化":"http://localhost:4040/preview/pc/3","盈利分布":"http://localhost:4040/preview/pc/4","用户画像":{"用户分布":"http://localhost:4040/preview/pc/5"}}}},"component_type":"layout","component_id":1}}]'
 
+@DragDropContext(HTML5Backend)
 class App extends React.Component {
     render() {
         let test = JSON.parse(components)

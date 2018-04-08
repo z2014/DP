@@ -119,6 +119,15 @@ import HTML5Backend from 'react-dnd-html5-backend'
                 }
             }
         
+            if (children.com.component_name === 'button') {
+                return (ctx) => {
+                    require.ensure([], (require) => {
+                        ctx.state.com = require('/Users/a2014/Desktop/project/scripts/components/js/button/index')
+                        ctx.setState({})
+                    }, 'button')
+                }
+            }
+        
         }
 
         componentDidMount() {
@@ -143,7 +152,7 @@ import HTML5Backend from 'react-dnd-html5-backend'
                         false ? 
                         (<div className="btn-nav">
                             <i className="icon icon-edit btn-oper" onClick={this.edit} />
-                            <i className="icon icon-close btn-oper" onClick={this.edit} />
+                            <i className="icon icon-close btn-oper" onClick={this.close} />
                         </div>) : null
                     }
                     { this.state.com ? React.createElement(this.state.com, this.props) : null }     
@@ -154,7 +163,7 @@ import HTML5Backend from 'react-dnd-html5-backend'
     
 
 
-const components = '[{"com":{"component_name":"datePicker","component_path":"components/js/datePicker/index","component_desc":"时间选择器","component_meta":{"url":{"name":"获取数据","type":"string"},"content":{"name":"文本内容","type":"string"}},"component_type":"filter","component_id":0}},{"com":{"component_name":"layout","component_path":"components/js/layout/index","component_desc":"自定义布局","component_meta":{"url":{"name":"获取数据","type":"string"},"content":{"name":"定义布局","type":"jsoneditor","value":{"1":1,"2":2}}},"component_type":"layout","component_id":3,"component_child":{"0":[{"com":{"component_name":"text","component_path":"components/js/text/index","component_desc":"文本","component_meta":{"label":{"name":"文本组件","type":"string","value":"fff"},"content":{"name":"文本内容","type":"string","value":"oooooo"},"style":{"name":"样式","type":"radio","def":"style","options":{"center":"居中","left":"居左","right":"居右"}}},"component_type":"chart"}}],"1":[{"com":{"component_name":"text","component_path":"components/js/text/index","component_desc":"文本","component_meta":{"label":{"name":"文本组件","type":"string"},"content":{"name":"文本内容","type":"string","value":"tttttt"},"style":{"name":"样式","type":"radio","def":"style","options":{"center":"居中","left":"居左","right":"居右"}}},"component_type":"chart"}}]}}}]'
+const components = '[{"com":{"component_name":"layout","component_path":"components/js/layout/index","component_desc":"自定义布局","component_meta":{"url":{"name":"获取数据","type":"string"},"content":{"name":"定义布局","type":"jsoneditor","value":{"key":1,"div":2}}},"component_type":"layout","component_id":0,"component_child":{"0":[{"com":{"component_name":"text","component_path":"components/js/text/index","component_desc":"文本","component_meta":{"label":{"name":"文本组件","type":"string","value":"ff"},"content":{"name":"文本内容","type":"string","value":"ttiiiff"},"style":{"name":"样式","type":"radio","def":"style","options":{"center":"居中","left":"居左","right":"居右"}}},"component_type":"chart"}}],"1":[{"com":{"component_name":"pieChart","component_path":"components/js/pie/index","component_desc":"饼状图","component_meta":{"url":{"name":"获取数据","type":"string","value":"https://www.easy-mock.com/mock/5aadcefad923ab62b0bb4f4b/project/piechart"},"content":{"name":"文本内容","type":"string"}},"component_type":"chart"}}]}}}]'
 
 @DragDropContext(HTML5Backend)
 class App extends React.Component {

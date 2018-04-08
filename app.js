@@ -11,6 +11,7 @@ const index = require('./routers/index')
 const create = require('./routers/create')
 const pageInfo = require('./routers/pageInfo')
 const jserr = require('./routers/jserr')
+const excel = require('./routers/excel')
 
 app.use(koaStatic(
     path.join(__dirname, './public')
@@ -30,6 +31,7 @@ app.use(index.routes())
 app.use(create.routes())
 app.use(pageInfo.routes())
 app.use(jserr.routes())
+app.use(excel.routes())
 
 app.listen(4040)
 

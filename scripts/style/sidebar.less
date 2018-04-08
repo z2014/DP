@@ -1,15 +1,20 @@
+body{
+    margin: 0;
+    padding: 0;
+}
 .sidebar-wrapper{
     overflow: hidden;
 }
 .sidebar-side{
     float: left;
-    width: 100px;
+    width: 150px;
     margin-bottom: -9999px;
     padding-bottom: 9999px;
     border: 1px solid #eee;
+    background-color: #001529;
 }
 .sidebar-iframe{
-    float: left;
+    overflow: auto;
     min-height: 200px;
 }
 .sidebar-item{
@@ -18,9 +23,63 @@
     box-sizing: border-box;
     text-align: center;
     padding: 10px;
-    background-color: #eee;
+    background-color: #001529;
+    color: gray;
     cursor: pointer;
+    font-size: 12px;
+}
+.sidebar-item-child{
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 10px;
+    background-color: black;
+    color: gray;
+    cursor: pointer;
+    font-size: 12px;
+}
+.sidebar-item-child:before{
+    width: 20px;
+    height: 1px;
+    display: inline-block;
+    content: '';
 }
 .sidebar-select{
-    background-color: #ccc;
+    background-color: #1890ff;
+    color: white;
+}
+.basic-component {
+    min-height: 50px;
+    position: relative;
+    overflow: hidden;
+}
+.icon{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 0 auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    vertical-align: sub;
+    margin-right: 5px;
+}
+.icon-dashboard{
+    background-image: url('/img/dashboard.png');
+}
+.icon-yingli{
+    background-image: url('/img/yingli.png');
+}
+.icon-liuliang{
+    background-image: url('/img/liuliang.png');
+}
+.icon-menu{
+    background-image: url('/img/menu.png');
+}
+.icon-fold{
+    background-image: url('/img/fold.png');
+}
+.icon-user{
+    background-image: url('/img/user.png');
 }
